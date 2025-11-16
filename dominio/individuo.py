@@ -4,6 +4,7 @@ class Individuo:
     def __init__(self, num_pesos, random_init=True):
         self.num_pesos = num_pesos
         if random_init:
+    # cromossomo 180 pesos
             self.pesos = np.random.uniform(-1, 1, num_pesos)
         else:
             self.pesos = np.zeros(num_pesos)
