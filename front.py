@@ -17,10 +17,75 @@ def exibir_menu():
 # Jogada da máquina ALEATÓRIA (temporária)
 # ----------------------------------------------------------------------
 import random
-def jogada_maquina_aleatoria(jogo: TicTacToe, jogador):
-    movimentos = jogo.movimentos_disponiveis()
-    l, c = random.choice(movimentos)
-    jogo.fazer_jogada(l, c, jogador)
+def minimax_vs_rn(jogo: TicTacToe, jogador, pesos=None, modo: str = 'dificil'):
+    """Executa o restante da partida fazendo Minimax jogar contra uma Rede Neural.
+
+    - `jogo`: instância de `TicTacToe` com estado atual
+    - `jogador`: inteiro (1 ou -1) que indica qual lado será jogado pelo Minimax
+    - `pesos`: sequência de 180 floats ou `None`. Se `None`, tentamos carregar
+       `pesos.npy` do diretório do projeto; se não disponível, usamos pesos aleatórios.
+    - `modo`: modo do Minimax passado para `melhor_jogada_modo` ('dificil'|'medio')
+
+    A função joga até o final, alternando Minimax e Rede Neural, e aplica as jogadas
+    diretamente em `jogo`.
+    """
+
+    # Carrega Rede Neural
+    from rede_neural import RedeNeural
+
+
+    # Tenta obter pesos: argumento -> arquivo `pesos.npy` -> aleatórios
+    rn_pesos = None
+    if pesos is not None:
+        rn_pesos = pesos
+    else:
+        try:
+            import numpy as _np
+            import pathlib
+            p = pathlib.Path(__file__).resolve().parent.parent / 'pesos.npy'
+            if p.exists():
+                rn_pesos = _np.load(str(p))
+        except Exception:
+            rn_pesos = None
+
+    if rn_pesos is None:
+        # fallback: pesos aleatórios de sinal e magnitude variados
+        try:
+            import numpy as _np
+            rn_pesos = _np.random.uniform(-1, 1, 180)
+        except Exception:
+            # sem numpy disponível, usa lista de floats via random
+            rn_pesos = [random.uniform(-1, 1) for _ in range(180)]
+
+    rn = RedeNeural(rn_pesos)
+
+    # Importa Minimax
+    from operacao.minimax import melhor_jogada_modo
+
+    current = jogador
+
+    # Joga até terminar, alternando Minimax (current==jogador) e RN (current!=jogador)
+    while not jogo.jogo_terminou():
+        if current == jogador:
+            move = melhor_jogada_modo(jogo, current, modo)
+            if move is None:
+                # sem movimentos (deveria terminar), sai
+                break
+            jogo.fazer_jogada(move[0], move[1], current)
+        else:
+            tab_flat = [jogo.board[i][j] for i in range(3) for j in range(3)]
+            movs = jogo.movimentos_disponiveis()
+            if not movs:
+                break
+            escolha = rn.escolher_jogada(tab_flat, movs)
+            if escolha is None or not jogo.jogada_valida(escolha[0], escolha[1]):
+                # fallback aleatório
+                l, c = random.choice(movs)
+                jogo.fazer_jogada(l, c, current)
+            else:
+                jogo.fazer_jogada(escolha[0], escolha[1], current)
+
+        current = -current
 
 # ----------------------------------------------------------------------
 # Jogada do humano
@@ -50,7 +115,10 @@ def jogada_minimax(jogo: TicTacToe, jogador, modo: str = 'dificil'):
     move = melhor_jogada_modo(jogo, jogador, modo)
     if move is None:
         # fallback para aleatória (não deve ocorrer)
-        jogada_maquina_aleatoria(jogo, jogador)
+        movs = jogo.movimentos_disponiveis()
+        if movs:
+            l, c = random.choice(movs)
+            jogo.fazer_jogada(l, c, jogador)
     else:
         l, c = move
         jogo.fazer_jogada(l, c, jogador)
@@ -72,7 +140,8 @@ def jogar_contra_maquina():
             jogada_humano(jogo, 1)
         else:
             print("Vez da máquina (O)")
-            jogada_maquina_aleatoria(jogo, -1)
+            # executa Minimax x Rede Neural a partir do estado atual
+            minimax_vs_rn(jogo, -1)
 
         vencedor = jogo.checar_vencedor()
         if vencedor is not None:
