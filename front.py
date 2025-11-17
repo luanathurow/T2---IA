@@ -37,8 +37,23 @@ def jogada_humano(jogo: TicTacToe, jogador):
                     print("Casa ocupada! Tente de novo.")
             else:
                 print("Posição inválida! Use valores entre 0 e 2.")
-        except:
+        except Exception:
             print("Entrada inválida!")
+
+
+# ----------------------------------------------------------------------
+# Jogada do Minimax (com modos)
+# ----------------------------------------------------------------------
+def jogada_minimax(jogo: TicTacToe, jogador, modo: str = 'dificil'):
+    from operacao.minimax import melhor_jogada_modo
+
+    move = melhor_jogada_modo(jogo, jogador, modo)
+    if move is None:
+        # fallback para aleatória (não deve ocorrer)
+        jogada_maquina_aleatoria(jogo, jogador)
+    else:
+        l, c = move
+        jogo.fazer_jogada(l, c, jogador)
 
 # ----------------------------------------------------------------------
 # Lógica completa de uma partida
@@ -106,6 +121,41 @@ def jogar_humano_vs_humano():
 
         jogador *= -1
 
+
+def jogar_contra_minimax(modo: str = 'dificil'):
+    jogo = TicTacToe()
+    jogador = 1  # começa sempre o X (humano)
+
+    while True:
+        limpar_console()
+        jogo.mostrar()
+
+        # Jogador humano
+        if jogador == 1:
+            print("Sua vez (X)")
+            jogada_humano(jogo, 1)
+        else:
+            print(f"Vez do Minimax ({modo}) (O)")
+            jogada_minimax(jogo, -1, modo)
+
+        vencedor = jogo.checar_vencedor()
+        if vencedor is not None:
+            limpar_console()
+            jogo.mostrar()
+            if vencedor == 1:
+                print("\nVocê venceu! 🎉")
+            else:
+                print("\nO Minimax venceu! 🤖")
+            break
+
+        if jogo.checar_empate():
+            limpar_console()
+            jogo.mostrar()
+            print("\nEmpate!")
+            break
+
+        jogador *= -1  # troca 1 → -1 → 1 → -1 ...
+
 def main():
     while True:
         opc = exibir_menu()
@@ -115,8 +165,13 @@ def main():
         elif opc == '2':
             jogar_contra_maquina()
         elif opc == '3':
-            print("\n Minimax ainda não implementado.")
-            input("Pressione ENTER para voltar.")
+            print("\nEscolha a dificuldade do Minimax:")
+            print("1 - Fácil (sempre aleatório)")
+            print("2 - Médio (50% minimax, 50% aleatório)")
+            print("3 - Difícil (sempre minimax)")
+            escolha = input("Escolha (1/2/3): ")
+            modo = {'1':'facil', '2':'medio', '3':'dificil'}.get(escolha, 'dificil')
+            jogar_contra_minimax(modo)
         elif opc == '4':
             print("\n Rede Neural ainda não implementada.")
             input("Pressione ENTER.")
