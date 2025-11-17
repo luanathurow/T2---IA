@@ -1,3 +1,5 @@
+# operacao/minimax.py
+
 from tic_tac_toe import TicTacToe
 import random
 
@@ -5,7 +7,8 @@ import random
 def _minimax(game: TicTacToe, is_maximizing: bool):
     """
     Minimax simples (retorna utilidade final):
-    retorna 1 se X vencer, -1 se O vencer, 0 empate.
+    retorna 1 se X vencer, -1 se O vencer, 0 se empate.
+    Avalia sempre do ponto de vista do X (1).
     """
     winner = game.checar_vencedor()
     if winner is not None:
@@ -17,7 +20,7 @@ def _minimax(game: TicTacToe, is_maximizing: bool):
     if is_maximizing:
         best = -float('inf')
         for (i, j) in game.movimentos_disponiveis():
-            game.board[i][j] = 1
+            game.board[i][j] = 1  # X
             val = _minimax(game, False)
             game.board[i][j] = 0
             if val > best:
@@ -26,7 +29,7 @@ def _minimax(game: TicTacToe, is_maximizing: bool):
     else:
         best = float('inf')
         for (i, j) in game.movimentos_disponiveis():
-            game.board[i][j] = -1
+            game.board[i][j] = -1  # O
             val = _minimax(game, True)
             game.board[i][j] = 0
             if val < best:
@@ -85,5 +88,5 @@ def melhor_jogada_modo(game: TicTacToe, jogador: int, modo: str = 'dificil'):
                 return None
             return random.choice(movs)
 
-    # padrão: dificil (sempre minimax)
+    # padrão: difícil (sempre Minimax)
     return melhor_jogada(game, jogador)
