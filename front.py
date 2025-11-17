@@ -1,8 +1,5 @@
 from tic_tac_toe import TicTacToe
-import os
 
-def limpar_console():
-    os.system('cls' if os.name == 'nt' else 'clear')
 
 def exibir_menu():
     print("\n===== JOGO DA VELHA - IA =====")
@@ -131,7 +128,7 @@ def jogar_contra_maquina():
     jogador = 1  # começa sempre o X (IA no futuro)
 
     while True:
-        limpar_console()
+        
         jogo.mostrar()
 
         # Jogador humano
@@ -145,7 +142,7 @@ def jogar_contra_maquina():
 
         vencedor = jogo.checar_vencedor()
         if vencedor is not None:
-            limpar_console()
+            
             jogo.mostrar()
             if vencedor == 1:
                 print("\nVocê venceu! 🎉")
@@ -154,7 +151,7 @@ def jogar_contra_maquina():
             break
 
         if jogo.checar_empate():
-            limpar_console()
+            
             jogo.mostrar()
             print("\nEmpate!")
             break
@@ -169,7 +166,7 @@ def jogar_humano_vs_humano():
     jogador = 1
 
     while True:
-        limpar_console()
+        
         jogo.mostrar()
         print(f"Jogador { 'X' if jogador == 1 else 'O' }")
 
@@ -177,13 +174,13 @@ def jogar_humano_vs_humano():
 
         vencedor = jogo.checar_vencedor()
         if vencedor is not None:
-            limpar_console()
+            
             jogo.mostrar()
             print(f"\nJogador {'X' if vencedor == 1 else 'O'} venceu! 🎉")
             break
 
         if jogo.checar_empate():
-            limpar_console()
+            
             jogo.mostrar()
             print("\nEmpate!")
             break
@@ -196,7 +193,7 @@ def jogar_contra_minimax(modo: str = 'dificil'):
     jogador = 1  # começa sempre o X (humano)
 
     while True:
-        limpar_console()
+        
         jogo.mostrar()
 
         # Jogador humano
@@ -209,7 +206,7 @@ def jogar_contra_minimax(modo: str = 'dificil'):
 
         vencedor = jogo.checar_vencedor()
         if vencedor is not None:
-            limpar_console()
+            
             jogo.mostrar()
             if vencedor == 1:
                 print("\nVocê venceu! 🎉")
@@ -218,7 +215,7 @@ def jogar_contra_minimax(modo: str = 'dificil'):
             break
 
         if jogo.checar_empate():
-            limpar_console()
+            
             jogo.mostrar()
             print("\nEmpate!")
             break
