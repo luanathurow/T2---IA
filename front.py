@@ -166,11 +166,10 @@ def main():
             jogar_contra_maquina()
         elif opc == '3':
             print("\nEscolha a dificuldade do Minimax:")
-            print("1 - Fácil (sempre aleatório)")
-            print("2 - Médio (50% minimax, 50% aleatório)")
-            print("3 - Difícil (sempre minimax)")
-            escolha = input("Escolha (1/2/3): ")
-            modo = {'1':'facil', '2':'medio', '3':'dificil'}.get(escolha, 'dificil')
+            print("1 - Médio (50% minimax, 50% aleatório)")
+            print("2 - Difícil (sempre minimax)")
+            escolha = input("Escolha (1/2): ")
+            modo = {'1':'medio', '2':'dificil'}.get(escolha, 'dificil')
             jogar_contra_minimax(modo)
         elif opc == '4':
             print("\n Rede Neural ainda não implementada.")

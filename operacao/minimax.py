@@ -70,17 +70,10 @@ def melhor_jogada(game: TicTacToe, jogador: int):
 def melhor_jogada_modo(game: TicTacToe, jogador: int, modo: str = 'dificil'):
     """
     Retorna a melhor jogada considerando o modo de dificuldade.
-    - modo = 'facil'  : sempre joga aleatório
     - modo = 'medio'  : 50% Minimax, 50% aleatório
-    - modo = 'dificil': sempre Minimax
+    - modo = 'dificil': sempre Minimax (padrão)
     """
     modo = modo.lower() if modo else 'dificil'
-
-    if modo == 'facil':
-        movs = game.movimentos_disponiveis()
-        if not movs:
-            return None
-        return random.choice(movs)
 
     if modo == 'medio':
         # 50% das vezes usa Minimax, 50% aleatório
@@ -92,5 +85,5 @@ def melhor_jogada_modo(game: TicTacToe, jogador: int, modo: str = 'dificil'):
                 return None
             return random.choice(movs)
 
-    # padrão: dificil
+    # padrão: dificil (sempre minimax)
     return melhor_jogada(game, jogador)
