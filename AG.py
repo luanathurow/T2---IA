@@ -4,10 +4,16 @@ import numpy as np
 
 from tic_tac_toe import TicTacToe
 from rede_neural import NeuralNetwork
+from minimax import melhor_jogada_modo  # <-- novo
+
 
 # ----------------------------------------------------------
 # Parâmetros do AG (pode ajustar depois para experimentar)
 # ----------------------------------------------------------
+venceu = 0
+perdeu = 0
+empate = 0
+arq = ''
 POP_SIZE = 40
 NUM_GERACOES = 50
 ELITE_SIZE = 4
@@ -15,7 +21,12 @@ TORNEIO_K = 3
 TAXA_MUTACAO = 0.1
 STD_MUTACAO = 0.1
 JOGOS_POR_INDIVIDUO = 5  # nº de partidas rede vs oponente para avaliar fitness
+log_file = open("log_ag.txt", "w")
 
+def log(msg):
+    global log_file
+    print(msg)            # continua aparecendo no console
+    log_file.write(msg + "\n")
 
 # ----------------------------------------------------------
 # Oponente ALEATÓRIO (sem minimax)
@@ -27,18 +38,34 @@ def jogada_oponente_aleatorio(jogo: TicTacToe, jogador: int):
     l, c = random.choice(movs)
     jogo.fazer_jogada(l, c, jogador)
 
+def jogada_oponente_minimax(jogo: TicTacToe, jogador: int, dificuldade: str = 'dificil'):
+    """
+    Oponente jogando com Minimax (usando sua função melhor_jogada_modo).
+    """
+    move = melhor_jogada_modo(jogo, jogador, modo=dificuldade)
+    if move is None:
+        # fallback de segurança
+        movs = jogo.movimentos_disponiveis()
+        if not movs:
+            return
+        l, c = random.choice(movs)
+    else:
+        l, c = move
+
+    jogo.fazer_jogada(l, c, jogador)
 
 # ----------------------------------------------------------
 # Função de avaliação (fitness) - SEM MINIMAX
 # ----------------------------------------------------------
-def avaliar_rede(rede: NeuralNetwork) -> float:
+def avaliar_rede(rede: NeuralNetwork, dificuldade_oponente: str = 'dificil') -> float:
     """
-    Avalia a rede jogando JOGOS_POR_INDIVIDUO partidas contra um oponente aleatório.
+    Avalia a rede jogando JOGOS_POR_INDIVIDUO partidas contra um oponente Minimax.
 
     - A rede SEMPRE começa e joga como X (1).
-    - O oponente (aleatório) joga como O (-1).
+    - O oponente (Minimax) joga como O (-1).
     - Retorna um escore de fitness (quanto maior, melhor).
     """
+    global venceu, perdeu, empate
     fitness_total = 0.0
 
     for _ in range(JOGOS_POR_INDIVIDUO):
@@ -57,7 +84,6 @@ def avaliar_rede(rede: NeuralNetwork) -> float:
 
                 l, c = rede.escolher_jogada(jogo.board, movs_validos)
 
-                # Se (por qualquer bug) não for válida, penaliza e força jogada válida
                 if not jogo.jogada_valida(l, c):
                     penalidade_invalidos += 1
                     l, c = random.choice(movs_validos)
@@ -66,8 +92,8 @@ def avaliar_rede(rede: NeuralNetwork) -> float:
                 jogadas_validas += 1
 
             else:
-                # Oponente aleatório
-                jogada_oponente_aleatorio(jogo, jogador_atual)
+                # Oponente Minimax
+                jogada_oponente_minimax(jogo, jogador_atual, dificuldade_oponente)
 
             jogador_atual *= -1  # troca turno
 
@@ -77,10 +103,13 @@ def avaliar_rede(rede: NeuralNetwork) -> float:
         # Função de aptidão (fitness)
         # ------------------------------
         if vencedor == 1:      # rede venceu
+            venceu += 1
             fitness_total += 10
         elif vencedor == -1:   # rede perdeu
+            perdeu += 1
             fitness_total -= 8
         else:                  # empate
+            empate += 1
             fitness_total += 5
 
         # penaliza jogadas inválidas e recompensa jogadas válidas
@@ -185,8 +214,12 @@ def treinar_ag(
     pop_size=POP_SIZE,
     hidden_size=18
 ):
+    global venceu, perdeu, empate
     """
-    Treina a rede usando AG jogando contra um oponente aleatório.
+    Treina a rede usando AG jogando contra um oponente Minimax.
+
+    - Nas primeiras gerações → Minimax modo 'medio'
+    - Nas últimas gerações   → Minimax modo 'dificil'
 
     Retorna:
     - melhor_cromossomo_global (np.ndarray)
@@ -196,17 +229,46 @@ def treinar_ag(
         pop_size=pop_size,
         hidden_size=hidden_size
     )
+    historico_diferencas = []   # armazena as diferenças entre populações
+    populacao_anterior = None   # primeira geração não tem anterior
 
     melhor_fitness_global = float('-inf')
     melhor_cromossomo_global = None
+    
+    # ponto de troca: metade das gerações
+    ponto_troca = max(1, num_geracoes // 2)
 
     for geracao in range(num_geracoes):
         fitness = []
 
+        # Define dificuldade do oponente nesta geração
+        if geracao < ponto_troca:
+            dificuldade_atual = 'medio'
+        else:
+            dificuldade_atual = 'dificil'
+
+        print(f"\n>>> Geração {geracao+1}/{num_geracoes} "
+              f"jogando contra Minimax modo '{dificuldade_atual}'")
+
+        # ---------------------------------------------
+        # MÉDIA DA DIFERENÇA ENTRE GERAÇÕES
+        # ---------------------------------------------
+        if populacao_anterior is not None:
+            pa = np.array(populacao_anterior)
+            pc = np.array(populacao)
+
+            diffs = np.linalg.norm(pc - pa, axis=1)
+            media_dif = diffs.mean()
+            historico_diferencas.append(media_dif)
+
+            print(f"MÉDIA DA DIFERENÇA PARA A GERAÇÃO {geracao+1}: {media_dif:.4f}")
+
+        populacao_anterior = [chrom.copy() for chrom in populacao]
+
         # Avaliação de todos os cromossomos
         for chrom in populacao:
             rede = NeuralNetwork.from_chromosome(chrom, hidden_size=hidden_size)
-            fit = avaliar_rede(rede)
+            fit = avaliar_rede(rede, dificuldade_oponente=dificuldade_atual)
             fitness.append(fit)
 
         fitness = np.array(fitness, dtype=float)
@@ -214,8 +276,27 @@ def treinar_ag(
         max_fit = fitness.max()
         min_fit = fitness.min()
 
-        print(f"Geração {geracao + 1}/{num_geracoes} | "
-              f"fitness: max={max_fit:.2f}, med={media_fit:.2f}, min={min_fit:.2f}")
+        idx_ordenados = np.argsort(fitness)[::-1]
+
+        print(f"\n=== Geração {geracao+1}/{num_geracoes} ===")
+        print(f"Melhor fitness : {max_fit:.3f}")
+        print(f"Média          : {media_fit:.3f}")
+        print(f"Pior fitness   : {min_fit:.3f}\n")
+
+        print("ELITE (top indivíduos):")
+        for rank in range(ELITE_SIZE):
+            idx = idx_ordenados[rank]
+            print(f"  #{rank+1:02d} Indiv {idx:02d} → fitness = {fitness[idx]:.3f}")
+
+        print("\nDEMAIS INDIVÍDUOS:")
+        for rank in range(ELITE_SIZE, len(populacao)):
+            idx = idx_ordenados[rank]
+            print(f"  Indiv {idx:02d} → fitness = {fitness[idx]:.3f}")
+
+        print(f'Venceu {venceu}  Perdeu {perdeu} Empatou {empate}')
+        venceu = 0
+        perdeu = 0
+        empate = 0
 
         # Atualiza melhor global
         idx_best = int(np.argmax(fitness))
@@ -232,15 +313,12 @@ def treinar_ag(
         elite = selecao_elitismo(populacao, fitness)
         pais = selecao_torneio(populacao, fitness)
         filhos = gerar_filhos(pais)
-        mutacao(filhos)
-
+        # mutacao(filhos)
         populacao = elite + filhos
         populacao = populacao[:pop_size]
 
-    # Constrói rede com o melhor cromossomo encontrado
     melhor_rede = NeuralNetwork.from_chromosome(melhor_cromossomo_global, hidden_size=hidden_size)
 
-    # Salva cromossomo em arquivo para uso pelo front-end
     np.save("best_chromosome.npy", melhor_cromossomo_global)
     print(f"\nTreino concluído. Melhor fitness global = {melhor_fitness_global:.2f}")
     print("Melhor cromossomo salvo em 'best_chromosome.npy'.")

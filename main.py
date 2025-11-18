@@ -251,12 +251,13 @@ def jogar_contra_rede():
 
         jogador *= -1
 
-    # Métrica simples de “acurácia”: proporção de jogadas válidas da rede
     if jogadas_totais_rede > 0:
         acuracia = jogadas_validas_rede / jogadas_totais_rede
         print(f"\nAcurácia aproximada da IA (jogadas válidas): {acuracia * 100:.2f}%")
     else:
         print("\nNão houve jogadas da IA para medir acurácia.")
+
+
 
     input("Pressione ENTER para continuar.")
 
@@ -268,15 +269,16 @@ def treinar_rede():
     limpar_console()
     print("=== Treino da Rede Neural com Algoritmo Genético + Minimax ===\n")
     print("Durante o treino, a rede SEMPRE começa jogando como X (1).")
-    print("O adversário usado pelo AG é o Minimax (primeiro médio, depois difícil).")
+    print("Nas primeiras gerações, o oponente é o Minimax em modo MÉDIO;")
+    print("nas últimas gerações, o oponente é o Minimax em modo DIFÍCIL.")
     print("Os pesos finais serão salvos em 'best_chromosome.npy'.\n")
     input("Pressione ENTER para iniciar o treino...")
 
     melhor_chrom, melhor_rede = treinar_ag()
-
     print("\nTreino concluído!")
     print("Melhor cromossomo salvo em 'best_chromosome.npy'.")
     input("Pressione ENTER para continuar.")
+
 
 
 # ----------------------------------------------------------------------

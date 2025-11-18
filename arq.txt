@@ -1,0 +1,1400 @@
+[H[2J[3J
+===== JOGO DA VELHA - IA =====
+1 - Jogar contra outro humano
+2 - Jogar contra máquina (aleatória)
+3 - Jogar contra IA (Minimax)  [Dificuldade 1]
+4 - Jogar contra IA (Rede Neural treinada)  [Dificuldade 2]
+5 - Treinar Rede Neural com Algoritmo Genético + Minimax
+0 - Sair
+Escolha uma opção: [H[2J[3J=== Treino da Rede Neural com Algoritmo Genético + Minimax ===
+
+Durante o treino, a rede SEMPRE começa jogando como X (1).
+Nas primeiras gerações, o oponente é o Minimax em modo MÉDIO;
+nas últimas gerações, o oponente é o Minimax em modo DIFÍCIL.
+Os pesos finais serão salvos em 'best_chromosome.npy'.
+
+Pressione ENTER para iniciar o treino...
+>>> Geração 1/50 jogando contra Minimax modo 'medio'
+
+=== Geração 1/50 ===
+Melhor fitness : 55.000
+Média          : 16.775
+Pior fitness   : -22.000
+
+ELITE (top indivíduos):
+  #01 Indiv 01 → fitness = 55.000
+  #02 Indiv 05 → fitness = 55.000
+  #03 Indiv 34 → fitness = 51.000
+  #04 Indiv 12 → fitness = 48.000
+
+DEMAIS INDIVÍDUOS:
+  Indiv 04 → fitness = 40.000
+  Indiv 32 → fitness = 36.000
+  Indiv 03 → fitness = 34.000
+  Indiv 27 → fitness = 33.000
+  Indiv 15 → fitness = 33.000
+  Indiv 39 → fitness = 32.000
+  Indiv 26 → fitness = 31.000
+  Indiv 29 → fitness = 31.000
+  Indiv 13 → fitness = 31.000
+  Indiv 25 → fitness = 30.000
+  Indiv 35 → fitness = 26.000
+  Indiv 20 → fitness = 25.000
+  Indiv 18 → fitness = 24.000
+  Indiv 28 → fitness = 16.000
+  Indiv 16 → fitness = 16.000
+  Indiv 37 → fitness = 15.000
+  Indiv 23 → fitness = 13.000
+  Indiv 17 → fitness = 12.000
+  Indiv 19 → fitness = 12.000
+  Indiv 30 → fitness = 12.000
+  Indiv 02 → fitness = 12.000
+  Indiv 31 → fitness = 11.000
+  Indiv 11 → fitness = 7.000
+  Indiv 24 → fitness = 6.000
+  Indiv 00 → fitness = -1.000
+  Indiv 07 → fitness = -3.000
+  Indiv 08 → fitness = -3.000
+  Indiv 38 → fitness = -5.000
+  Indiv 10 → fitness = -5.000
+  Indiv 21 → fitness = -5.000
+  Indiv 22 → fitness = -5.000
+  Indiv 33 → fitness = -6.000
+  Indiv 36 → fitness = -7.000
+  Indiv 14 → fitness = -7.000
+  Indiv 09 → fitness = -7.000
+  Indiv 06 → fitness = -22.000
+Venceu 58  Perdeu 109 Empatou 33
+
+>>> Geração 2/50 jogando contra Minimax modo 'medio'
+MÉDIA DA DIFERENÇA PARA A GERAÇÃO 2: 13.0405
+
+=== Geração 2/50 ===
+Melhor fitness : 65.000
+Média          : 25.275
+Pior fitness   : -9.000
+
+ELITE (top indivíduos):
+  #01 Indiv 14 → fitness = 65.000
+  #02 Indiv 00 → fitness = 60.000
+  #03 Indiv 05 → fitness = 59.000
+  #04 Indiv 01 → fitness = 54.000
+
+DEMAIS INDIVÍDUOS:
+  Indiv 39 → fitness = 52.000
+  Indiv 22 → fitness = 52.000
+  Indiv 20 → fitness = 48.000
+  Indiv 19 → fitness = 47.000
+  Indiv 21 → fitness = 47.000
+  Indiv 07 → fitness = 46.000
+  Indiv 23 → fitness = 39.000
+  Indiv 17 → fitness = 39.000
+  Indiv 06 → fitness = 35.000
+  Indiv 28 → fitness = 33.000
+  Indiv 24 → fitness = 33.000
+  Indiv 30 → fitness = 31.000
+  Indiv 02 → fitness = 31.000
+  Indiv 35 → fitness = 30.000
+  Indiv 34 → fitness = 29.000
+  Indiv 18 → fitness = 28.000
+  Indiv 08 → fitness = 25.000
+  Indiv 04 → fitness = 22.000
+  Indiv 27 → fitness = 16.000
+  Indiv 32 → fitness = 14.000
+  Indiv 31 → fitness = 14.000
+  Indiv 12 → fitness = 14.000
+  Indiv 33 → fitness = 13.000
+  Indiv 37 → fitness = 12.000
+  Indiv 11 → fitness = 12.000
+  Indiv 16 → fitness = 12.000
+  Indiv 29 → fitness = 11.000
+  Indiv 13 → fitness = 10.000
+  Indiv 36 → fitness = 9.000
+  Indiv 03 → fitness = 6.000
+  Indiv 26 → fitness = -3.000
+  Indiv 25 → fitness = -6.000
+  Indiv 10 → fitness = -6.000
+  Indiv 15 → fitness = -6.000
+  Indiv 38 → fitness = -7.000
+  Indiv 09 → fitness = -9.000
+Venceu 70  Perdeu 88 Empatou 42
+
+>>> Geração 3/50 jogando contra Minimax modo 'medio'
+MÉDIA DA DIFERENÇA PARA A GERAÇÃO 3: 9.3295
+
+=== Geração 3/50 ===
+Melhor fitness : 72.000
+Média          : 21.350
+Pior fitness   : -22.000
+
+ELITE (top indivíduos):
+  #01 Indiv 14 → fitness = 72.000
+  #02 Indiv 21 → fitness = 66.000
+  #03 Indiv 30 → fitness = 59.000
+  #04 Indiv 01 → fitness = 54.000
+
+DEMAIS INDIVÍDUOS:
+  Indiv 07 → fitness = 52.000
+  Indiv 15 → fitness = 50.000
+  Indiv 04 → fitness = 45.000
+  Indiv 36 → fitness = 44.000
+  Indiv 03 → fitness = 44.000
+  Indiv 31 → fitness = 43.000
+  Indiv 02 → fitness = 40.000
+  Indiv 05 → fitness = 39.000
+  Indiv 09 → fitness = 35.000
+  Indiv 06 → fitness = 35.000
+  Indiv 27 → fitness = 33.000
+  Indiv 16 → fitness = 32.000
+  Indiv 25 → fitness = 29.000
+  Indiv 18 → fitness = 29.000
+  Indiv 13 → fitness = 17.000
+  Indiv 11 → fitness = 16.000
+  Indiv 35 → fitness = 16.000
+  Indiv 39 → fitness = 15.000
+  Indiv 10 → fitness = 15.000
+  Indiv 19 → fitness = 14.000
+  Indiv 17 → fitness = 12.000
+  Indiv 28 → fitness = 11.000
+  Indiv 33 → fitness = 10.000
+  Indiv 37 → fitness = 7.000
+  Indiv 29 → fitness = 7.000
+  Indiv 00 → fitness = -3.000
+  Indiv 08 → fitness = -3.000
+  Indiv 26 → fitness = -4.000
+  Indiv 20 → fitness = -4.000
+  Indiv 24 → fitness = -5.000
+  Indiv 12 → fitness = -5.000
+  Indiv 22 → fitness = -5.000
+  Indiv 23 → fitness = -7.000
+  Indiv 34 → fitness = -8.000
+  Indiv 32 → fitness = -21.000
+  Indiv 38 → fitness = -22.000
+Venceu 64  Perdeu 98 Empatou 38
+
+>>> Geração 4/50 jogando contra Minimax modo 'medio'
+MÉDIA DA DIFERENÇA PARA A GERAÇÃO 4: 6.6263
+
+=== Geração 4/50 ===
+Melhor fitness : 64.000
+Média          : 17.750
+Pior fitness   : -24.000
+
+ELITE (top indivíduos):
+  #01 Indiv 33 → fitness = 64.000
+  #02 Indiv 03 → fitness = 64.000
+  #03 Indiv 35 → fitness = 59.000
+  #04 Indiv 32 → fitness = 57.000
+
+DEMAIS INDIVÍDUOS:
+  Indiv 05 → fitness = 54.000
+  Indiv 08 → fitness = 45.000
+  Indiv 34 → fitness = 45.000
+  Indiv 02 → fitness = 43.000
+  Indiv 19 → fitness = 39.000
+  Indiv 14 → fitness = 36.000
+  Indiv 39 → fitness = 36.000
+  Indiv 31 → fitness = 35.000
+  Indiv 01 → fitness = 33.000
+  Indiv 29 → fitness = 30.000
+  Indiv 38 → fitness = 24.000
+  Indiv 37 → fitness = 24.000
+  Indiv 25 → fitness = 17.000
+  Indiv 06 → fitness = 16.000
+  Indiv 00 → fitness = 15.000
+  Indiv 23 → fitness = 14.000
+  Indiv 11 → fitness = 14.000
+  Indiv 36 → fitness = 13.000
+  Indiv 12 → fitness = 12.000
+  Indiv 30 → fitness = 12.000
+  Indiv 07 → fitness = 12.000
+  Indiv 21 → fitness = 11.000
+  Indiv 20 → fitness = 8.000
+  Indiv 15 → fitness = 7.000
+  Indiv 13 → fitness = -3.000
+  Indiv 18 → fitness = -3.000
+  Indiv 26 → fitness = -3.000
+  Indiv 17 → fitness = -4.000
+  Indiv 09 → fitness = -4.000
+  Indiv 16 → fitness = -5.000
+  Indiv 24 → fitness = -6.000
+  Indiv 04 → fitness = -8.000
+  Indiv 22 → fitness = -23.000
+  Indiv 27 → fitness = -23.000
+  Indiv 28 → fitness = -23.000
+  Indiv 10 → fitness = -24.000
+Venceu 52  Perdeu 104 Empatou 44
+
+>>> Geração 5/50 jogando contra Minimax modo 'medio'
+MÉDIA DA DIFERENÇA PARA A GERAÇÃO 5: 4.4860
+
+=== Geração 5/50 ===
+Melhor fitness : 66.000
+Média          : 26.575
+Pior fitness   : -23.000
+
+ELITE (top indivíduos):
+  #01 Indiv 00 → fitness = 66.000
+  #02 Indiv 36 → fitness = 65.000
+  #03 Indiv 24 → fitness = 55.000
+  #04 Indiv 14 → fitness = 51.000
+
+DEMAIS INDIVÍDUOS:
+  Indiv 21 → fitness = 50.000
+  Indiv 37 → fitness = 50.000
+  Indiv 22 → fitness = 46.000
+  Indiv 39 → fitness = 44.000
+  Indiv 31 → fitness = 44.000
+  Indiv 15 → fitness = 44.000
+  Indiv 03 → fitness = 43.000
+  Indiv 16 → fitness = 43.000
+  Indiv 01 → fitness = 43.000
+  Indiv 02 → fitness = 41.000
+  Indiv 08 → fitness = 40.000
+  Indiv 25 → fitness = 36.000
+  Indiv 20 → fitness = 35.000
+  Indiv 09 → fitness = 30.000
+  Indiv 38 → fitness = 29.000
+  Indiv 30 → fitness = 27.000
+  Indiv 05 → fitness = 25.000
+  Indiv 07 → fitness = 22.000
+  Indiv 18 → fitness = 21.000
+  Indiv 32 → fitness = 21.000
+  Indiv 19 → fitness = 16.000
+  Indiv 06 → fitness = 15.000
+  Indiv 29 → fitness = 14.000
+  Indiv 04 → fitness = 13.000
+  Indiv 23 → fitness = 12.000
+  Indiv 17 → fitness = 10.000
+  Indiv 28 → fitness = 9.000
+  Indiv 10 → fitness = 7.000
+  Indiv 26 → fitness = 7.000
+  Indiv 33 → fitness = 6.000
+  Indiv 35 → fitness = 6.000
+  Indiv 34 → fitness = 6.000
+  Indiv 12 → fitness = 6.000
+  Indiv 11 → fitness = -6.000
+  Indiv 13 → fitness = -6.000
+  Indiv 27 → fitness = -23.000
+Venceu 52  Perdeu 81 Empatou 67
+
+>>> Geração 6/50 jogando contra Minimax modo 'medio'
+MÉDIA DA DIFERENÇA PARA A GERAÇÃO 6: 3.1601
+
+=== Geração 6/50 ===
+Melhor fitness : 72.000
+Média          : 26.775
+Pior fitness   : -22.000
+
+ELITE (top indivíduos):
+  #01 Indiv 06 → fitness = 72.000
+  #02 Indiv 07 → fitness = 68.000
+  #03 Indiv 02 → fitness = 60.000
+  #04 Indiv 05 → fitness = 60.000
+
+DEMAIS INDIVÍDUOS:
+  Indiv 15 → fitness = 53.000
+  Indiv 14 → fitness = 48.000
+  Indiv 04 → fitness = 45.000
+  Indiv 18 → fitness = 45.000
+  Indiv 13 → fitness = 44.000
+  Indiv 00 → fitness = 43.000
+  Indiv 01 → fitness = 40.000
+  Indiv 38 → fitness = 40.000
+  Indiv 33 → fitness = 40.000
+  Indiv 39 → fitness = 36.000
+  Indiv 16 → fitness = 36.000
+  Indiv 17 → fitness = 36.000
+  Indiv 27 → fitness = 34.000
+  Indiv 10 → fitness = 32.000
+  Indiv 26 → fitness = 32.000
+  Indiv 32 → fitness = 32.000
+  Indiv 35 → fitness = 32.000
+  Indiv 28 → fitness = 32.000
+  Indiv 37 → fitness = 31.000
+  Indiv 08 → fitness = 31.000
+  Indiv 24 → fitness = 30.000
+  Indiv 31 → fitness = 26.000
+  Indiv 30 → fitness = 25.000
+  Indiv 34 → fitness = 13.000
+  Indiv 25 → fitness = 13.000
+  Indiv 23 → fitness = 12.000
+  Indiv 36 → fitness = 10.000
+  Indiv 21 → fitness = -2.000
+  Indiv 12 → fitness = -2.000
+  Indiv 09 → fitness = -3.000
+  Indiv 20 → fitness = -4.000
+  Indiv 03 → fitness = -7.000
+  Indiv 29 → fitness = -9.000
+  Indiv 22 → fitness = -9.000
+  Indiv 19 → fitness = -22.000
+  Indiv 11 → fitness = -22.000
+Venceu 66  Perdeu 85 Empatou 49
+
+>>> Geração 7/50 jogando contra Minimax modo 'medio'
+MÉDIA DA DIFERENÇA PARA A GERAÇÃO 7: 2.1123
+
+=== Geração 7/50 ===
+Melhor fitness : 67.000
+Média          : 31.775
+Pior fitness   : -20.000
+
+ELITE (top indivíduos):
+  #01 Indiv 01 → fitness = 67.000
+  #02 Indiv 28 → fitness = 65.000
+  #03 Indiv 03 → fitness = 60.000
+  #04 Indiv 11 → fitness = 59.000
+
+DEMAIS INDIVÍDUOS:
+  Indiv 00 → fitness = 59.000
+  Indiv 02 → fitness = 55.000
+  Indiv 33 → fitness = 53.000
+  Indiv 14 → fitness = 48.000
+  Indiv 06 → fitness = 48.000
+  Indiv 08 → fitness = 48.000
+  Indiv 32 → fitness = 47.000
+  Indiv 24 → fitness = 46.000
+  Indiv 29 → fitness = 45.000
+  Indiv 10 → fitness = 43.000
+  Indiv 13 → fitness = 41.000
+  Indiv 38 → fitness = 40.000
+  Indiv 31 → fitness = 37.000
+  Indiv 21 → fitness = 35.000
+  Indiv 09 → fitness = 34.000
+  Indiv 15 → fitness = 34.000
+  Indiv 20 → fitness = 33.000
+  Indiv 05 → fitness = 33.000
+  Indiv 16 → fitness = 31.000
+  Indiv 27 → fitness = 27.000
+  Indiv 25 → fitness = 26.000
+  Indiv 07 → fitness = 26.000
+  Indiv 30 → fitness = 22.000
+  Indiv 23 → fitness = 15.000
+  Indiv 18 → fitness = 13.000
+  Indiv 26 → fitness = 13.000
+  Indiv 22 → fitness = 13.000
+  Indiv 39 → fitness = 12.000
+  Indiv 17 → fitness = 12.000
+  Indiv 19 → fitness = 12.000
+  Indiv 36 → fitness = 12.000
+  Indiv 35 → fitness = 12.000
+  Indiv 12 → fitness = 12.000
+  Indiv 37 → fitness = 8.000
+  Indiv 04 → fitness = -5.000
+  Indiv 34 → fitness = -20.000
+Venceu 73  Perdeu 74 Empatou 53
+
+>>> Geração 8/50 jogando contra Minimax modo 'medio'
+MÉDIA DA DIFERENÇA PARA A GERAÇÃO 8: 1.9297
+
+=== Geração 8/50 ===
+Melhor fitness : 73.000
+Média          : 26.450
+Pior fitness   : -24.000
+
+ELITE (top indivíduos):
+  #01 Indiv 27 → fitness = 73.000
+  #02 Indiv 28 → fitness = 72.000
+  #03 Indiv 24 → fitness = 71.000
+  #04 Indiv 00 → fitness = 63.000
+
+DEMAIS INDIVÍDUOS:
+  Indiv 05 → fitness = 52.000
+  Indiv 22 → fitness = 48.000
+  Indiv 14 → fitness = 46.000
+  Indiv 01 → fitness = 46.000
+  Indiv 34 → fitness = 44.000
+  Indiv 13 → fitness = 41.000
+  Indiv 04 → fitness = 40.000
+  Indiv 06 → fitness = 39.000
+  Indiv 12 → fitness = 36.000
+  Indiv 09 → fitness = 35.000
+  Indiv 39 → fitness = 32.000
+  Indiv 29 → fitness = 32.000
+  Indiv 15 → fitness = 32.000
+  Indiv 37 → fitness = 30.000
+  Indiv 31 → fitness = 30.000
+  Indiv 20 → fitness = 29.000
+  Indiv 36 → fitness = 28.000
+  Indiv 11 → fitness = 28.000
+  Indiv 17 → fitness = 27.000
+  Indiv 03 → fitness = 26.000
+  Indiv 26 → fitness = 25.000
+  Indiv 08 → fitness = 22.000
+  Indiv 23 → fitness = 13.000
+  Indiv 02 → fitness = 11.000
+  Indiv 10 → fitness = 10.000
+  Indiv 35 → fitness = 10.000
+  Indiv 32 → fitness = 6.000
+  Indiv 21 → fitness = 6.000
+  Indiv 19 → fitness = 6.000
+  Indiv 07 → fitness = -1.000
+  Indiv 30 → fitness = -3.000
+  Indiv 33 → fitness = -4.000
+  Indiv 25 → fitness = -5.000
+  Indiv 38 → fitness = -6.000
+  Indiv 18 → fitness = -8.000
+  Indiv 16 → fitness = -24.000
+Venceu 65  Perdeu 84 Empatou 51
+
+>>> Geração 9/50 jogando contra Minimax modo 'medio'
+MÉDIA DA DIFERENÇA PARA A GERAÇÃO 9: 1.3990
+
+=== Geração 9/50 ===
+Melhor fitness : 71.000
+Média          : 33.750
+Pior fitness   : -24.000
+
+ELITE (top indivíduos):
+  #01 Indiv 01 → fitness = 71.000
+  #02 Indiv 28 → fitness = 69.000
+  #03 Indiv 32 → fitness = 54.000
+  #04 Indiv 35 → fitness = 53.000
+
+DEMAIS INDIVÍDUOS:
+  Indiv 05 → fitness = 53.000
+  Indiv 17 → fitness = 52.000
+  Indiv 36 → fitness = 52.000
+  Indiv 37 → fitness = 52.000
+  Indiv 16 → fitness = 52.000
+  Indiv 24 → fitness = 51.000
+  Indiv 34 → fitness = 49.000
+  Indiv 19 → fitness = 48.000
+  Indiv 39 → fitness = 44.000
+  Indiv 02 → fitness = 44.000
+  Indiv 27 → fitness = 43.000
+  Indiv 13 → fitness = 37.000
+  Indiv 26 → fitness = 36.000
+  Indiv 22 → fitness = 33.000
+  Indiv 25 → fitness = 33.000
+  Indiv 06 → fitness = 33.000
+  Indiv 09 → fitness = 33.000
+  Indiv 31 → fitness = 33.000
+  Indiv 00 → fitness = 32.000
+  Indiv 30 → fitness = 30.000
+  Indiv 04 → fitness = 30.000
+  Indiv 03 → fitness = 29.000
+  Indiv 20 → fitness = 29.000
+  Indiv 14 → fitness = 28.000
+  Indiv 38 → fitness = 24.000
+  Indiv 10 → fitness = 17.000
+  Indiv 29 → fitness = 17.000
+  Indiv 12 → fitness = 16.000
+  Indiv 21 → fitness = 15.000
+  Indiv 08 → fitness = 15.000
+  Indiv 07 → fitness = 14.000
+  Indiv 23 → fitness = 14.000
+  Indiv 15 → fitness = 14.000
+  Indiv 18 → fitness = 13.000
+  Indiv 11 → fitness = 12.000
+  Indiv 33 → fitness = -24.000
+Venceu 104  Perdeu 75 Empatou 21
+
+>>> Geração 10/50 jogando contra Minimax modo 'medio'
+MÉDIA DA DIFERENÇA PARA A GERAÇÃO 10: 1.0126
+
+=== Geração 10/50 ===
+Melhor fitness : 74.000
+Média          : 35.425
+Pior fitness   : -5.000
+
+ELITE (top indivíduos):
+  #01 Indiv 32 → fitness = 74.000
+  #02 Indiv 06 → fitness = 74.000
+  #03 Indiv 21 → fitness = 70.000
+  #04 Indiv 00 → fitness = 65.000
+
+DEMAIS INDIVÍDUOS:
+  Indiv 13 → fitness = 54.000
+  Indiv 20 → fitness = 52.000
+  Indiv 29 → fitness = 52.000
+  Indiv 02 → fitness = 52.000
+  Indiv 24 → fitness = 52.000
+  Indiv 16 → fitness = 51.000
+  Indiv 39 → fitness = 51.000
+  Indiv 15 → fitness = 50.000
+  Indiv 14 → fitness = 49.000
+  Indiv 28 → fitness = 48.000
+  Indiv 31 → fitness = 48.000
+  Indiv 08 → fitness = 47.000
+  Indiv 05 → fitness = 44.000
+  Indiv 19 → fitness = 44.000
+  Indiv 04 → fitness = 34.000
+  Indiv 22 → fitness = 34.000
+  Indiv 34 → fitness = 34.000
+  Indiv 25 → fitness = 33.000
+  Indiv 03 → fitness = 33.000
+  Indiv 35 → fitness = 32.000
+  Indiv 12 → fitness = 32.000
+  Indiv 26 → fitness = 32.000
+  Indiv 30 → fitness = 31.000
+  Indiv 09 → fitness = 30.000
+  Indiv 10 → fitness = 27.000
+  Indiv 11 → fitness = 22.000
+  Indiv 38 → fitness = 16.000
+  Indiv 33 → fitness = 14.000
+  Indiv 27 → fitness = 14.000
+  Indiv 23 → fitness = 13.000
+  Indiv 18 → fitness = 12.000
+  Indiv 07 → fitness = 10.000
+  Indiv 37 → fitness = -2.000
+  Indiv 36 → fitness = -2.000
+  Indiv 01 → fitness = -4.000
+  Indiv 17 → fitness = -5.000
+Venceu 110  Perdeu 72 Empatou 18
+
+>>> Geração 11/50 jogando contra Minimax modo 'medio'
+MÉDIA DA DIFERENÇA PARA A GERAÇÃO 11: 0.6384
+
+=== Geração 11/50 ===
+Melhor fitness : 72.000
+Média          : 35.375
+Pior fitness   : -5.000
+
+ELITE (top indivíduos):
+  #01 Indiv 24 → fitness = 72.000
+  #02 Indiv 04 → fitness = 71.000
+  #03 Indiv 27 → fitness = 68.000
+  #04 Indiv 17 → fitness = 66.000
+
+DEMAIS INDIVÍDUOS:
+  Indiv 39 → fitness = 53.000
+  Indiv 37 → fitness = 53.000
+  Indiv 33 → fitness = 53.000
+  Indiv 12 → fitness = 53.000
+  Indiv 32 → fitness = 52.000
+  Indiv 06 → fitness = 52.000
+  Indiv 28 → fitness = 51.000
+  Indiv 35 → fitness = 50.000
+  Indiv 34 → fitness = 48.000
+  Indiv 07 → fitness = 48.000
+  Indiv 25 → fitness = 47.000
+  Indiv 29 → fitness = 46.000
+  Indiv 01 → fitness = 43.000
+  Indiv 19 → fitness = 36.000
+  Indiv 09 → fitness = 34.000
+  Indiv 38 → fitness = 33.000
+  Indiv 10 → fitness = 33.000
+  Indiv 20 → fitness = 33.000
+  Indiv 22 → fitness = 33.000
+  Indiv 26 → fitness = 33.000
+  Indiv 11 → fitness = 33.000
+  Indiv 14 → fitness = 33.000
+  Indiv 13 → fitness = 31.000
+  Indiv 15 → fitness = 28.000
+  Indiv 30 → fitness = 24.000
+  Indiv 16 → fitness = 14.000
+  Indiv 02 → fitness = 14.000
+  Indiv 36 → fitness = 13.000
+  Indiv 08 → fitness = 13.000
+  Indiv 03 → fitness = 13.000
+  Indiv 18 → fitness = 13.000
+  Indiv 31 → fitness = 13.000
+  Indiv 05 → fitness = 12.000
+  Indiv 00 → fitness = 10.000
+  Indiv 23 → fitness = -5.000
+  Indiv 21 → fitness = -5.000
+Venceu 115  Perdeu 72 Empatou 13
+
+>>> Geração 12/50 jogando contra Minimax modo 'medio'
+MÉDIA DA DIFERENÇA PARA A GERAÇÃO 12: 0.3507
+
+=== Geração 12/50 ===
+Melhor fitness : 73.000
+Média          : 29.100
+Pior fitness   : -6.000
+
+ELITE (top indivíduos):
+  #01 Indiv 37 → fitness = 73.000
+  #02 Indiv 11 → fitness = 72.000
+  #03 Indiv 16 → fitness = 67.000
+  #04 Indiv 06 → fitness = 53.000
+
+DEMAIS INDIVÍDUOS:
+  Indiv 24 → fitness = 53.000
+  Indiv 15 → fitness = 52.000
+  Indiv 01 → fitness = 52.000
+  Indiv 39 → fitness = 51.000
+  Indiv 03 → fitness = 51.000
+  Indiv 20 → fitness = 50.000
+  Indiv 10 → fitness = 47.000
+  Indiv 02 → fitness = 34.000
+  Indiv 17 → fitness = 34.000
+  Indiv 28 → fitness = 34.000
+  Indiv 36 → fitness = 33.000
+  Indiv 38 → fitness = 33.000
+  Indiv 31 → fitness = 33.000
+  Indiv 18 → fitness = 33.000
+  Indiv 35 → fitness = 33.000
+  Indiv 32 → fitness = 32.000
+  Indiv 13 → fitness = 32.000
+  Indiv 21 → fitness = 29.000
+  Indiv 22 → fitness = 28.000
+  Indiv 23 → fitness = 28.000
+  Indiv 27 → fitness = 28.000
+  Indiv 19 → fitness = 25.000
+  Indiv 07 → fitness = 15.000
+  Indiv 33 → fitness = 14.000
+  Indiv 14 → fitness = 14.000
+  Indiv 00 → fitness = 14.000
+  Indiv 12 → fitness = 14.000
+  Indiv 34 → fitness = 13.000
+  Indiv 08 → fitness = 13.000
+  Indiv 04 → fitness = 9.000
+  Indiv 29 → fitness = -4.000
+  Indiv 09 → fitness = -5.000
+  Indiv 05 → fitness = -5.000
+  Indiv 26 → fitness = -6.000
+  Indiv 25 → fitness = -6.000
+  Indiv 30 → fitness = -6.000
+Venceu 104  Perdeu 86 Empatou 10
+
+>>> Geração 13/50 jogando contra Minimax modo 'medio'
+MÉDIA DA DIFERENÇA PARA A GERAÇÃO 13: 0.2091
+
+=== Geração 13/50 ===
+Melhor fitness : 70.000
+Média          : 33.325
+Pior fitness   : -10.000
+
+ELITE (top indivíduos):
+  #01 Indiv 35 → fitness = 70.000
+  #02 Indiv 17 → fitness = 70.000
+  #03 Indiv 22 → fitness = 68.000
+  #04 Indiv 33 → fitness = 68.000
+
+DEMAIS INDIVÍDUOS:
+  Indiv 06 → fitness = 66.000
+  Indiv 28 → fitness = 54.000
+  Indiv 00 → fitness = 53.000
+  Indiv 01 → fitness = 53.000
+  Indiv 13 → fitness = 53.000
+  Indiv 20 → fitness = 53.000
+  Indiv 29 → fitness = 52.000
+  Indiv 16 → fitness = 51.000
+  Indiv 39 → fitness = 50.000
+  Indiv 37 → fitness = 39.000
+  Indiv 21 → fitness = 35.000
+  Indiv 11 → fitness = 35.000
+  Indiv 05 → fitness = 34.000
+  Indiv 12 → fitness = 34.000
+  Indiv 18 → fitness = 33.000
+  Indiv 30 → fitness = 33.000
+  Indiv 03 → fitness = 33.000
+  Indiv 02 → fitness = 33.000
+  Indiv 31 → fitness = 33.000
+  Indiv 32 → fitness = 32.000
+  Indiv 23 → fitness = 29.000
+  Indiv 04 → fitness = 29.000
+  Indiv 36 → fitness = 29.000
+  Indiv 09 → fitness = 28.000
+  Indiv 07 → fitness = 16.000
+  Indiv 15 → fitness = 16.000
+  Indiv 19 → fitness = 15.000
+  Indiv 34 → fitness = 14.000
+  Indiv 27 → fitness = 14.000
+  Indiv 24 → fitness = 14.000
+  Indiv 08 → fitness = 12.000
+  Indiv 10 → fitness = 9.000
+  Indiv 38 → fitness = -5.000
+  Indiv 25 → fitness = -6.000
+  Indiv 14 → fitness = -6.000
+  Indiv 26 → fitness = -10.000
+Venceu 110  Perdeu 77 Empatou 13
+
+>>> Geração 14/50 jogando contra Minimax modo 'medio'
+MÉDIA DA DIFERENÇA PARA A GERAÇÃO 14: 0.1377
+
+=== Geração 14/50 ===
+Melhor fitness : 72.000
+Média          : 39.925
+Pior fitness   : -6.000
+
+ELITE (top indivíduos):
+  #01 Indiv 04 → fitness = 72.000
+  #02 Indiv 16 → fitness = 71.000
+  #03 Indiv 07 → fitness = 70.000
+  #04 Indiv 21 → fitness = 69.000
+
+DEMAIS INDIVÍDUOS:
+  Indiv 18 → fitness = 68.000
+  Indiv 01 → fitness = 67.000
+  Indiv 30 → fitness = 55.000
+  Indiv 37 → fitness = 54.000
+  Indiv 00 → fitness = 54.000
+  Indiv 26 → fitness = 54.000
+  Indiv 02 → fitness = 53.000
+  Indiv 06 → fitness = 53.000
+  Indiv 28 → fitness = 53.000
+  Indiv 27 → fitness = 53.000
+  Indiv 11 → fitness = 53.000
+  Indiv 03 → fitness = 52.000
+  Indiv 20 → fitness = 52.000
+  Indiv 22 → fitness = 49.000
+  Indiv 36 → fitness = 49.000
+  Indiv 23 → fitness = 48.000
+  Indiv 08 → fitness = 44.000
+  Indiv 32 → fitness = 43.000
+  Indiv 38 → fitness = 34.000
+  Indiv 09 → fitness = 34.000
+  Indiv 15 → fitness = 33.000
+  Indiv 35 → fitness = 33.000
+  Indiv 29 → fitness = 32.000
+  Indiv 17 → fitness = 32.000
+  Indiv 12 → fitness = 32.000
+  Indiv 19 → fitness = 30.000
+  Indiv 05 → fitness = 29.000
+  Indiv 33 → fitness = 28.000
+  Indiv 10 → fitness = 15.000
+  Indiv 39 → fitness = 14.000
+  Indiv 14 → fitness = 13.000
+  Indiv 25 → fitness = 10.000
+  Indiv 34 → fitness = 9.000
+  Indiv 13 → fitness = -5.000
+  Indiv 31 → fitness = -6.000
+  Indiv 24 → fitness = -6.000
+Venceu 122  Perdeu 63 Empatou 15
+
+>>> Geração 15/50 jogando contra Minimax modo 'medio'
+MÉDIA DA DIFERENÇA PARA A GERAÇÃO 15: 0.0719
+
+=== Geração 15/50 ===
+Melhor fitness : 70.000
+Média          : 31.300
+Pior fitness   : -25.000
+
+ELITE (top indivíduos):
+  #01 Indiv 03 → fitness = 70.000
+  #02 Indiv 05 → fitness = 68.000
+  #03 Indiv 34 → fitness = 66.000
+  #04 Indiv 17 → fitness = 64.000
+
+DEMAIS INDIVÍDUOS:
+  Indiv 06 → fitness = 54.000
+  Indiv 36 → fitness = 54.000
+  Indiv 25 → fitness = 53.000
+  Indiv 20 → fitness = 53.000
+  Indiv 02 → fitness = 52.000
+  Indiv 19 → fitness = 52.000
+  Indiv 14 → fitness = 49.000
+  Indiv 11 → fitness = 48.000
+  Indiv 32 → fitness = 36.000
+  Indiv 38 → fitness = 35.000
+  Indiv 15 → fitness = 35.000
+  Indiv 24 → fitness = 34.000
+  Indiv 26 → fitness = 34.000
+  Indiv 04 → fitness = 33.000
+  Indiv 37 → fitness = 33.000
+  Indiv 33 → fitness = 32.000
+  Indiv 07 → fitness = 32.000
+  Indiv 39 → fitness = 29.000
+  Indiv 27 → fitness = 29.000
+  Indiv 22 → fitness = 29.000
+  Indiv 01 → fitness = 29.000
+  Indiv 00 → fitness = 28.000
+  Indiv 18 → fitness = 24.000
+  Indiv 35 → fitness = 14.000
+  Indiv 28 → fitness = 14.000
+  Indiv 29 → fitness = 14.000
+  Indiv 30 → fitness = 14.000
+  Indiv 31 → fitness = 14.000
+  Indiv 08 → fitness = 14.000
+  Indiv 13 → fitness = 13.000
+  Indiv 16 → fitness = 13.000
+  Indiv 12 → fitness = 13.000
+  Indiv 09 → fitness = 9.000
+  Indiv 23 → fitness = -4.000
+  Indiv 10 → fitness = -6.000
+  Indiv 21 → fitness = -25.000
+Venceu 105  Perdeu 81 Empatou 14
+
+>>> Geração 16/50 jogando contra Minimax modo 'medio'
+MÉDIA DA DIFERENÇA PARA A GERAÇÃO 16: 0.0774
+
+=== Geração 16/50 ===
+Melhor fitness : 72.000
+Média          : 37.175
+Pior fitness   : -5.000
+
+ELITE (top indivíduos):
+  #01 Indiv 21 → fitness = 72.000
+  #02 Indiv 12 → fitness = 71.000
+  #03 Indiv 24 → fitness = 55.000
+  #04 Indiv 36 → fitness = 54.000
+
+DEMAIS INDIVÍDUOS:
+  Indiv 28 → fitness = 53.000
+  Indiv 32 → fitness = 53.000
+  Indiv 13 → fitness = 53.000
+  Indiv 35 → fitness = 52.000
+  Indiv 02 → fitness = 52.000
+  Indiv 03 → fitness = 52.000
+  Indiv 07 → fitness = 52.000
+  Indiv 22 → fitness = 52.000
+  Indiv 34 → fitness = 52.000
+  Indiv 01 → fitness = 52.000
+  Indiv 08 → fitness = 51.000
+  Indiv 33 → fitness = 51.000
+  Indiv 37 → fitness = 49.000
+  Indiv 10 → fitness = 48.000
+  Indiv 05 → fitness = 48.000
+  Indiv 39 → fitness = 34.000
+  Indiv 15 → fitness = 34.000
+  Indiv 17 → fitness = 34.000
+  Indiv 09 → fitness = 34.000
+  Indiv 23 → fitness = 34.000
+  Indiv 11 → fitness = 34.000
+  Indiv 31 → fitness = 33.000
+  Indiv 25 → fitness = 33.000
+  Indiv 29 → fitness = 32.000
+  Indiv 19 → fitness = 32.000
+  Indiv 27 → fitness = 31.000
+  Indiv 14 → fitness = 15.000
+  Indiv 16 → fitness = 15.000
+  Indiv 06 → fitness = 15.000
+  Indiv 38 → fitness = 14.000
+  Indiv 26 → fitness = 14.000
+  Indiv 18 → fitness = 14.000
+  Indiv 20 → fitness = 13.000
+  Indiv 30 → fitness = 10.000
+  Indiv 04 → fitness = -5.000
+  Indiv 00 → fitness = -5.000
+Venceu 124  Perdeu 71 Empatou 5
+
+>>> Geração 17/50 jogando contra Minimax modo 'medio'
+MÉDIA DA DIFERENÇA PARA A GERAÇÃO 17: 0.0488
+
+=== Geração 17/50 ===
+Melhor fitness : 73.000
+Média          : 32.350
+Pior fitness   : -6.000
+
+ELITE (top indivíduos):
+  #01 Indiv 03 → fitness = 73.000
+  #02 Indiv 19 → fitness = 63.000
+  #03 Indiv 23 → fitness = 59.000
+  #04 Indiv 16 → fitness = 55.000
+
+DEMAIS INDIVÍDUOS:
+  Indiv 34 → fitness = 54.000
+  Indiv 22 → fitness = 54.000
+  Indiv 31 → fitness = 53.000
+  Indiv 37 → fitness = 53.000
+  Indiv 01 → fitness = 53.000
+  Indiv 35 → fitness = 51.000
+  Indiv 17 → fitness = 51.000
+  Indiv 33 → fitness = 49.000
+  Indiv 13 → fitness = 48.000
+  Indiv 14 → fitness = 48.000
+  Indiv 38 → fitness = 47.000
+  Indiv 32 → fitness = 35.000
+  Indiv 25 → fitness = 35.000
+  Indiv 29 → fitness = 35.000
+  Indiv 28 → fitness = 33.000
+  Indiv 08 → fitness = 33.000
+  Indiv 02 → fitness = 33.000
+  Indiv 10 → fitness = 32.000
+  Indiv 12 → fitness = 32.000
+  Indiv 26 → fitness = 30.000
+  Indiv 05 → fitness = 29.000
+  Indiv 27 → fitness = 28.000
+  Indiv 20 → fitness = 15.000
+  Indiv 39 → fitness = 15.000
+  Indiv 06 → fitness = 15.000
+  Indiv 09 → fitness = 14.000
+  Indiv 18 → fitness = 14.000
+  Indiv 11 → fitness = 13.000
+  Indiv 30 → fitness = 13.000
+  Indiv 04 → fitness = 13.000
+  Indiv 15 → fitness = 13.000
+  Indiv 24 → fitness = 10.000
+  Indiv 07 → fitness = 9.000
+  Indiv 00 → fitness = -4.000
+  Indiv 36 → fitness = -6.000
+  Indiv 21 → fitness = -6.000
+Venceu 107  Perdeu 79 Empatou 14
+
+>>> Geração 18/50 jogando contra Minimax modo 'medio'
+MÉDIA DA DIFERENÇA PARA A GERAÇÃO 18: 0.0487
+
+=== Geração 18/50 ===
+Melhor fitness : 73.000
+Média          : 36.675
+Pior fitness   : -5.000
+
+ELITE (top indivíduos):
+  #01 Indiv 21 → fitness = 73.000
+  #02 Indiv 36 → fitness = 72.000
+  #03 Indiv 34 → fitness = 68.000
+  #04 Indiv 11 → fitness = 67.000
+
+DEMAIS INDIVÍDUOS:
+  Indiv 38 → fitness = 54.000
+  Indiv 27 → fitness = 52.000
+  Indiv 29 → fitness = 52.000
+  Indiv 35 → fitness = 52.000
+  Indiv 12 → fitness = 52.000
+  Indiv 31 → fitness = 49.000
+  Indiv 23 → fitness = 48.000
+  Indiv 07 → fitness = 48.000
+  Indiv 33 → fitness = 47.000
+  Indiv 05 → fitness = 44.000
+  Indiv 32 → fitness = 35.000
+  Indiv 10 → fitness = 34.000
+  Indiv 19 → fitness = 34.000
+  Indiv 03 → fitness = 34.000
+  Indiv 04 → fitness = 34.000
+  Indiv 39 → fitness = 33.000
+  Indiv 01 → fitness = 33.000
+  Indiv 16 → fitness = 33.000
+  Indiv 25 → fitness = 33.000
+  Indiv 28 → fitness = 33.000
+  Indiv 15 → fitness = 33.000
+  Indiv 02 → fitness = 33.000
+  Indiv 08 → fitness = 33.000
+  Indiv 09 → fitness = 33.000
+  Indiv 24 → fitness = 32.000
+  Indiv 14 → fitness = 31.000
+  Indiv 37 → fitness = 29.000
+  Indiv 18 → fitness = 28.000
+  Indiv 26 → fitness = 28.000
+  Indiv 06 → fitness = 15.000
+  Indiv 20 → fitness = 15.000
+  Indiv 22 → fitness = 14.000
+  Indiv 17 → fitness = 14.000
+  Indiv 30 → fitness = 10.000
+  Indiv 13 → fitness = 10.000
+  Indiv 00 → fitness = -5.000
+Venceu 117  Perdeu 70 Empatou 13
+
+>>> Geração 19/50 jogando contra Minimax modo 'medio'
+MÉDIA DA DIFERENÇA PARA A GERAÇÃO 19: 0.0356
+
+=== Geração 19/50 ===
+Melhor fitness : 73.000
+Média          : 31.775
+Pior fitness   : -10.000
+
+ELITE (top indivíduos):
+  #01 Indiv 29 → fitness = 73.000
+  #02 Indiv 12 → fitness = 54.000
+  #03 Indiv 01 → fitness = 54.000
+  #04 Indiv 24 → fitness = 53.000
+
+DEMAIS INDIVÍDUOS:
+  Indiv 06 → fitness = 53.000
+  Indiv 05 → fitness = 53.000
+  Indiv 09 → fitness = 53.000
+  Indiv 16 → fitness = 52.000
+  Indiv 07 → fitness = 52.000
+  Indiv 20 → fitness = 52.000
+  Indiv 28 → fitness = 51.000
+  Indiv 39 → fitness = 51.000
+  Indiv 04 → fitness = 45.000
+  Indiv 02 → fitness = 36.000
+  Indiv 22 → fitness = 35.000
+  Indiv 19 → fitness = 35.000
+  Indiv 15 → fitness = 35.000
+  Indiv 26 → fitness = 34.000
+  Indiv 38 → fitness = 34.000
+  Indiv 21 → fitness = 34.000
+  Indiv 35 → fitness = 33.000
+  Indiv 34 → fitness = 33.000
+  Indiv 11 → fitness = 33.000
+  Indiv 33 → fitness = 33.000
+  Indiv 25 → fitness = 33.000
+  Indiv 13 → fitness = 33.000
+  Indiv 17 → fitness = 32.000
+  Indiv 30 → fitness = 30.000
+  Indiv 23 → fitness = 29.000
+  Indiv 10 → fitness = 28.000
+  Indiv 00 → fitness = 15.000
+  Indiv 14 → fitness = 14.000
+  Indiv 03 → fitness = 12.000
+  Indiv 32 → fitness = 11.000
+  Indiv 27 → fitness = -4.000
+  Indiv 08 → fitness = -5.000
+  Indiv 18 → fitness = -6.000
+  Indiv 37 → fitness = -6.000
+  Indiv 31 → fitness = -6.000
+  Indiv 36 → fitness = -10.000
+Venceu 111  Perdeu 82 Empatou 7
+
+>>> Geração 20/50 jogando contra Minimax modo 'medio'
+MÉDIA DA DIFERENÇA PARA A GERAÇÃO 20: 0.0254
+
+=== Geração 20/50 ===
+Melhor fitness : 70.000
+Média          : 33.725
+Pior fitness   : -5.000
+
+ELITE (top indivíduos):
+  #01 Indiv 10 → fitness = 70.000
+  #02 Indiv 03 → fitness = 69.000
+  #03 Indiv 04 → fitness = 67.000
+  #04 Indiv 13 → fitness = 66.000
+
+DEMAIS INDIVÍDUOS:
+  Indiv 20 → fitness = 54.000
+  Indiv 35 → fitness = 53.000
+  Indiv 07 → fitness = 53.000
+  Indiv 06 → fitness = 53.000
+  Indiv 26 → fitness = 52.000
+  Indiv 25 → fitness = 51.000
+  Indiv 29 → fitness = 51.000
+  Indiv 37 → fitness = 49.000
+  Indiv 18 → fitness = 48.000
+  Indiv 39 → fitness = 44.000
+  Indiv 31 → fitness = 44.000
+  Indiv 30 → fitness = 34.000
+  Indiv 21 → fitness = 34.000
+  Indiv 02 → fitness = 33.000
+  Indiv 28 → fitness = 33.000
+  Indiv 12 → fitness = 33.000
+  Indiv 15 → fitness = 33.000
+  Indiv 38 → fitness = 32.000
+  Indiv 24 → fitness = 32.000
+  Indiv 33 → fitness = 32.000
+  Indiv 22 → fitness = 32.000
+  Indiv 00 → fitness = 29.000
+  Indiv 19 → fitness = 28.000
+  Indiv 01 → fitness = 16.000
+  Indiv 05 → fitness = 15.000
+  Indiv 08 → fitness = 15.000
+  Indiv 34 → fitness = 15.000
+  Indiv 17 → fitness = 14.000
+  Indiv 32 → fitness = 13.000
+  Indiv 36 → fitness = 13.000
+  Indiv 27 → fitness = 13.000
+  Indiv 14 → fitness = 13.000
+  Indiv 09 → fitness = 13.000
+  Indiv 16 → fitness = 10.000
+  Indiv 23 → fitness = -5.000
+  Indiv 11 → fitness = -5.000
+Venceu 112  Perdeu 76 Empatou 12
+
+>>> Geração 21/50 jogando contra Minimax modo 'medio'
+MÉDIA DA DIFERENÇA PARA A GERAÇÃO 21: 0.0158
+
+=== Geração 21/50 ===
+Melhor fitness : 71.000
+Média          : 36.325
+Pior fitness   : -5.000
+
+ELITE (top indivíduos):
+  #01 Indiv 30 → fitness = 71.000
+  #02 Indiv 35 → fitness = 68.000
+  #03 Indiv 28 → fitness = 67.000
+  #04 Indiv 34 → fitness = 53.000
+
+DEMAIS INDIVÍDUOS:
+  Indiv 29 → fitness = 53.000
+  Indiv 31 → fitness = 53.000
+  Indiv 02 → fitness = 53.000
+  Indiv 00 → fitness = 53.000
+  Indiv 08 → fitness = 53.000
+  Indiv 09 → fitness = 53.000
+  Indiv 16 → fitness = 52.000
+  Indiv 12 → fitness = 52.000
+  Indiv 24 → fitness = 51.000
+  Indiv 37 → fitness = 51.000
+  Indiv 23 → fitness = 51.000
+  Indiv 27 → fitness = 51.000
+  Indiv 11 → fitness = 47.000
+  Indiv 38 → fitness = 45.000
+  Indiv 20 → fitness = 34.000
+  Indiv 15 → fitness = 34.000
+  Indiv 22 → fitness = 33.000
+  Indiv 25 → fitness = 33.000
+  Indiv 26 → fitness = 33.000
+  Indiv 07 → fitness = 33.000
+  Indiv 39 → fitness = 32.000
+  Indiv 36 → fitness = 32.000
+  Indiv 06 → fitness = 29.000
+  Indiv 33 → fitness = 29.000
+  Indiv 01 → fitness = 28.000
+  Indiv 04 → fitness = 15.000
+  Indiv 05 → fitness = 14.000
+  Indiv 21 → fitness = 14.000
+  Indiv 19 → fitness = 14.000
+  Indiv 10 → fitness = 14.000
+  Indiv 13 → fitness = 14.000
+  Indiv 03 → fitness = 13.000
+  Indiv 18 → fitness = 13.000
+  Indiv 17 → fitness = 10.000
+  Indiv 14 → fitness = 10.000
+  Indiv 32 → fitness = -5.000
+Venceu 119  Perdeu 71 Empatou 10
+
+>>> Geração 22/50 jogando contra Minimax modo 'medio'
+MÉDIA DA DIFERENÇA PARA A GERAÇÃO 22: 0.0107
+
+=== Geração 22/50 ===
+Melhor fitness : 71.000
+Média          : 38.675
+Pior fitness   : -9.000
+
+ELITE (top indivíduos):
+  #01 Indiv 37 → fitness = 71.000
+  #02 Indiv 25 → fitness = 71.000
+  #03 Indiv 39 → fitness = 69.000
+  #04 Indiv 10 → fitness = 66.000
+
+DEMAIS INDIVÍDUOS:
+  Indiv 06 → fitness = 54.000
+  Indiv 11 → fitness = 54.000
+  Indiv 29 → fitness = 53.000
+  Indiv 19 → fitness = 53.000
+  Indiv 07 → fitness = 53.000
+  Indiv 05 → fitness = 53.000
+  Indiv 24 → fitness = 53.000
+  Indiv 23 → fitness = 53.000
+  Indiv 08 → fitness = 52.000
+  Indiv 35 → fitness = 52.000
+  Indiv 17 → fitness = 52.000
+  Indiv 27 → fitness = 49.000
+  Indiv 36 → fitness = 48.000
+  Indiv 18 → fitness = 48.000
+  Indiv 16 → fitness = 48.000
+  Indiv 13 → fitness = 47.000
+  Indiv 15 → fitness = 36.000
+  Indiv 02 → fitness = 34.000
+  Indiv 03 → fitness = 34.000
+  Indiv 00 → fitness = 33.000
+  Indiv 30 → fitness = 33.000
+  Indiv 26 → fitness = 33.000
+  Indiv 33 → fitness = 32.000
+  Indiv 32 → fitness = 32.000
+  Indiv 04 → fitness = 32.000
+  Indiv 09 → fitness = 32.000
+  Indiv 31 → fitness = 32.000
+  Indiv 21 → fitness = 29.000
+  Indiv 22 → fitness = 29.000
+  Indiv 12 → fitness = 28.000
+  Indiv 01 → fitness = 13.000
+  Indiv 28 → fitness = 13.000
+  Indiv 34 → fitness = -6.000
+  Indiv 38 → fitness = -6.000
+  Indiv 14 → fitness = -6.000
+  Indiv 20 → fitness = -9.000
+Venceu 123  Perdeu 66 Empatou 11
+
+>>> Geração 23/50 jogando contra Minimax modo 'medio'
+MÉDIA DA DIFERENÇA PARA A GERAÇÃO 23: 0.0076
+
+=== Geração 23/50 ===
+Melhor fitness : 72.000
+Média          : 38.650
+Pior fitness   : -23.000
+
+ELITE (top indivíduos):
+  #01 Indiv 31 → fitness = 72.000
+  #02 Indiv 12 → fitness = 71.000
+  #03 Indiv 04 → fitness = 71.000
+  #04 Indiv 26 → fitness = 68.000
+
+DEMAIS INDIVÍDUOS:
+  Indiv 17 → fitness = 68.000
+  Indiv 19 → fitness = 67.000
+  Indiv 11 → fitness = 64.000
+  Indiv 06 → fitness = 63.000
+  Indiv 14 → fitness = 53.000
+  Indiv 29 → fitness = 52.000
+  Indiv 10 → fitness = 52.000
+  Indiv 08 → fitness = 52.000
+  Indiv 35 → fitness = 52.000
+  Indiv 32 → fitness = 52.000
+  Indiv 20 → fitness = 51.000
+  Indiv 05 → fitness = 49.000
+  Indiv 22 → fitness = 49.000
+  Indiv 16 → fitness = 49.000
+  Indiv 01 → fitness = 48.000
+  Indiv 28 → fitness = 47.000
+  Indiv 25 → fitness = 47.000
+  Indiv 38 → fitness = 43.000
+  Indiv 15 → fitness = 33.000
+  Indiv 03 → fitness = 33.000
+  Indiv 34 → fitness = 32.000
+  Indiv 24 → fitness = 30.000
+  Indiv 33 → fitness = 30.000
+  Indiv 18 → fitness = 29.000
+  Indiv 27 → fitness = 28.000
+  Indiv 21 → fitness = 28.000
+  Indiv 39 → fitness = 15.000
+  Indiv 36 → fitness = 15.000
+  Indiv 00 → fitness = 14.000
+  Indiv 07 → fitness = 14.000
+  Indiv 13 → fitness = 14.000
+  Indiv 09 → fitness = 13.000
+  Indiv 30 → fitness = 11.000
+  Indiv 02 → fitness = -4.000
+  Indiv 23 → fitness = -6.000
+  Indiv 37 → fitness = -23.000
+Venceu 115  Perdeu 64 Empatou 21
+
+>>> Geração 24/50 jogando contra Minimax modo 'medio'
+MÉDIA DA DIFERENÇA PARA A GERAÇÃO 24: 0.0052
+
+=== Geração 24/50 ===
+Melhor fitness : 72.000
+Média          : 37.775
+Pior fitness   : -23.000
+
+ELITE (top indivíduos):
+  #01 Indiv 27 → fitness = 72.000
+  #02 Indiv 04 → fitness = 71.000
+  #03 Indiv 03 → fitness = 70.000
+  #04 Indiv 24 → fitness = 69.000
+
+DEMAIS INDIVÍDUOS:
+  Indiv 13 → fitness = 68.000
+  Indiv 14 → fitness = 53.000
+  Indiv 09 → fitness = 53.000
+  Indiv 16 → fitness = 52.000
+  Indiv 01 → fitness = 52.000
+  Indiv 00 → fitness = 51.000
+  Indiv 22 → fitness = 51.000
+  Indiv 25 → fitness = 51.000
+  Indiv 35 → fitness = 49.000
+  Indiv 32 → fitness = 49.000
+  Indiv 19 → fitness = 48.000
+  Indiv 33 → fitness = 48.000
+  Indiv 05 → fitness = 36.000
+  Indiv 07 → fitness = 34.000
+  Indiv 17 → fitness = 34.000
+  Indiv 31 → fitness = 34.000
+  Indiv 34 → fitness = 33.000
+  Indiv 10 → fitness = 33.000
+  Indiv 06 → fitness = 33.000
+  Indiv 21 → fitness = 33.000
+  Indiv 29 → fitness = 33.000
+  Indiv 28 → fitness = 32.000
+  Indiv 02 → fitness = 32.000
+  Indiv 36 → fitness = 32.000
+  Indiv 15 → fitness = 29.000
+  Indiv 12 → fitness = 29.000
+  Indiv 18 → fitness = 29.000
+  Indiv 20 → fitness = 29.000
+  Indiv 08 → fitness = 28.000
+  Indiv 30 → fitness = 15.000
+  Indiv 38 → fitness = 15.000
+  Indiv 23 → fitness = 15.000
+  Indiv 26 → fitness = 13.000
+  Indiv 37 → fitness = 13.000
+  Indiv 11 → fitness = 13.000
+  Indiv 39 → fitness = -23.000
+Venceu 121  Perdeu 68 Empatou 11
+
+>>> Geração 25/50 jogando contra Minimax modo 'medio'
+MÉDIA DA DIFERENÇA PARA A GERAÇÃO 25: 0.0049
+
+=== Geração 25/50 ===
+Melhor fitness : 71.000
+Média          : 39.950
+Pior fitness   : -4.000
+
+ELITE (top indivíduos):
+  #01 Indiv 01 → fitness = 71.000
+  #02 Indiv 22 → fitness = 71.000
+  #03 Indiv 19 → fitness = 71.000
+  #04 Indiv 20 → fitness = 71.000
+
+DEMAIS INDIVÍDUOS:
+  Indiv 18 → fitness = 68.000
+  Indiv 08 → fitness = 67.000
+  Indiv 27 → fitness = 67.000
+  Indiv 14 → fitness = 67.000
+  Indiv 06 → fitness = 63.000
+  Indiv 34 → fitness = 54.000
+  Indiv 00 → fitness = 53.000
+  Indiv 24 → fitness = 53.000
+  Indiv 16 → fitness = 53.000
+  Indiv 05 → fitness = 53.000
+  Indiv 37 → fitness = 51.000
+  Indiv 32 → fitness = 51.000
+  Indiv 04 → fitness = 51.000
+  Indiv 30 → fitness = 48.000
+  Indiv 39 → fitness = 47.000
+  Indiv 23 → fitness = 34.000
+  Indiv 31 → fitness = 33.000
+  Indiv 21 → fitness = 33.000
+  Indiv 11 → fitness = 33.000
+  Indiv 13 → fitness = 32.000
+  Indiv 28 → fitness = 32.000
+  Indiv 07 → fitness = 32.000
+  Indiv 02 → fitness = 32.000
+  Indiv 10 → fitness = 30.000
+  Indiv 38 → fitness = 28.000
+  Indiv 33 → fitness = 25.000
+  Indiv 26 → fitness = 16.000
+  Indiv 35 → fitness = 15.000
+  Indiv 17 → fitness = 15.000
+  Indiv 09 → fitness = 14.000
+  Indiv 29 → fitness = 14.000
+  Indiv 25 → fitness = 14.000
+  Indiv 03 → fitness = 14.000
+  Indiv 15 → fitness = 13.000
+  Indiv 12 → fitness = 13.000
+  Indiv 36 → fitness = -4.000
+Venceu 125  Perdeu 63 Empatou 12
+
+>>> Geração 26/50 jogando contra Minimax modo 'dificil'
+MÉDIA DA DIFERENÇA PARA A GERAÇÃO 26: 0.0038
+
+=== Geração 26/50 ===
+Melhor fitness : -25.000
+Média          : -25.000
+Pior fitness   : -25.000
+
+ELITE (top indivíduos):
+  #01 Indiv 39 → fitness = -25.000
+  #02 Indiv 38 → fitness = -25.000
+  #03 Indiv 37 → fitness = -25.000
+  #04 Indiv 36 → fitness = -25.000
+
+DEMAIS INDIVÍDUOS:
+  Indiv 35 → fitness = -25.000
+  Indiv 34 → fitness = -25.000
+  Indiv 33 → fitness = -25.000
+  Indiv 32 → fitness = -25.000
+  Indiv 31 → fitness = -25.000
+  Indiv 30 → fitness = -25.000
+  Indiv 29 → fitness = -25.000
+  Indiv 28 → fitness = -25.000
+  Indiv 27 → fitness = -25.000
+  Indiv 26 → fitness = -25.000
+  Indiv 25 → fitness = -25.000
+  Indiv 24 → fitness = -25.000
+  Indiv 23 → fitness = -25.000
+  Indiv 22 → fitness = -25.000
+  Indiv 21 → fitness = -25.000
+  Indiv 20 → fitness = -25.000
+  Indiv 19 → fitness = -25.000
+  Indiv 18 → fitness = -25.000
+  Indiv 17 → fitness = -25.000
+  Indiv 16 → fitness = -25.000
+  Indiv 15 → fitness = -25.000
+  Indiv 14 → fitness = -25.000
+  Indiv 13 → fitness = -25.000
+  Indiv 12 → fitness = -25.000
+  Indiv 11 → fitness = -25.000
+  Indiv 10 → fitness = -25.000
+  Indiv 09 → fitness = -25.000
+  Indiv 08 → fitness = -25.000
+  Indiv 07 → fitness = -25.000
+  Indiv 06 → fitness = -25.000
+  Indiv 05 → fitness = -25.000
+  Indiv 04 → fitness = -25.000
+  Indiv 03 → fitness = -25.000
+  Indiv 02 → fitness = -25.000
+  Indiv 01 → fitness = -25.000
+  Indiv 00 → fitness = -25.000
+Venceu 0  Perdeu 200 Empatou 0
+Convergência detectada (baixa variância de fitness). Encerrando treino.
+
+Treino concluído. Melhor fitness global = 74.00
+Melhor cromossomo salvo em 'best_chromosome.npy'.
+
+Treino concluído!
+Melhor cromossomo salvo em 'best_chromosome.npy'.
+Pressione ENTER para continuar.
