@@ -23,6 +23,64 @@ except Exception:
 	from .minimax import melhor_jogada_modo
 
 
+def jogar_uma_partida(rn, partida_index: int, num_partidas: int, modo_minimax: str, verbose: bool):
+	"""Executa uma única partida entre `rn` e Minimax.
+
+	Retorna (resultado, acertos, erros).
+	"""
+	game = TicTacToe()
+
+	# alterna quem começa de forma determinística: RN começa nas partidas pares
+	rn_jogador = 1 if (partida_index % 2 == 0) else -1
+	current = rn_jogador
+
+	acertos = 0
+	erros = 0
+
+	if verbose:
+		print(f"Partida {partida_index+1}/{num_partidas}: RN joga como {rn_jogador}")
+
+	while not game.jogo_terminou():
+		if current == rn_jogador:
+			tab_flat = [game.board[i][j] for i in range(3) for j in range(3)]
+			movs = game.movimentos_disponiveis()
+			if not movs:
+				break
+
+			escolha = rn.escolher_jogada(tab_flat, movs)
+			if escolha is None or escolha not in movs:
+				erros += 1
+				if verbose:
+					print("  Jogada inválida/ilegal pela RN — conta como erro")
+				return -1, acertos, erros
+
+			ok = game.fazer_jogada(escolha[0], escolha[1], current)
+			if not ok:
+				erros += 1
+				if verbose:
+					print("  Jogada ilegal (casa ocupada) pela RN — conta como erro")
+				return -1, acertos, erros
+
+			acertos += 1
+		else:
+			mov = melhor_jogada_modo(game, current, modo=modo_minimax)
+			if mov is None:
+				break
+			game.fazer_jogada(mov[0], mov[1], current)
+
+		current = -current
+
+	vencedor = game.checar_vencedor()
+	if vencedor is None:
+		resultado = 0
+	elif vencedor == rn_jogador:
+		resultado = 1
+	else:
+		resultado = -1
+
+	return resultado, acertos, erros
+
+
 def aptidao(pesos: Sequence[float], num_partidas: int = 20, modo_minimax: str = "dificil", verbose: bool = False) -> float:
 	"""Avalia `pesos` jogando `num_partidas` contra o Minimax.
 
@@ -37,60 +95,26 @@ def aptidao(pesos: Sequence[float], num_partidas: int = 20, modo_minimax: str = 
 
 	rn = RedeNeural(pesos)
 
-	score = 0.0
+	total_score = 0.0
+
+	# pesos para combinar componentes: resultado do jogo tem maior peso
+	WEIGHT_RESULT = 1.0
+	WEIGHT_ACERTOS = 0.1
+	WEIGHT_ERROS = 0.2
 
 	for partida in range(num_partidas):
-		game = TicTacToe()
-
-		# Define aleatoriamente quem começa: 1 (X) ou -1 (O)
-		current = random.choice([1, -1])
-
-		# Define qual jogador é a RN nesta partida
-		rn_jogador = current
+		resultado, acertos, erros = jogar_uma_partida(rn, partida, num_partidas, modo_minimax, verbose)
+		partida_score = WEIGHT_RESULT * resultado + WEIGHT_ACERTOS * acertos - WEIGHT_ERROS * erros
+		total_score += partida_score
 
 		if verbose:
-			print(f"Partida {partida+1}/{num_partidas}: RN joga como {rn_jogador}")
-
-		# Loop de jogo
-		while not game.jogo_terminou():
-			if current == rn_jogador:
-				# Jogada da Rede Neural
-				# prepara tabuleiro flat (linha-major)
-				tab_flat = [game.board[i][j] for i in range(3) for j in range(3)]
-
-				movs = game.movimentos_disponiveis()
-				if not movs:
-					break
-
-				escolha = rn.escolher_jogada(tab_flat, movs)
-				if escolha is None:
-					# sem movimento válido
-					break
-
-				game.fazer_jogada(escolha[0], escolha[1], current)
+			if resultado == 0:
+				outcome = "empate"
+			elif resultado == 1:
+				outcome = "vitoria"
 			else:
-				# Jogada do Minimax
-				mov = melhor_jogada_modo(game, current, modo=modo_minimax)
-				if mov is None:
-					break
-				game.fazer_jogada(mov[0], mov[1], current)
+				outcome = "derrota"
+			print(f"  Resultado: {outcome} | acertos={acertos} erros={erros} | partida_score={partida_score:.3f}")
 
-			# alterna jogador
-			current = -current
-
-		vencedor = game.checar_vencedor()
-		if vencedor is None:
-			# empate
-			resultado = 0
-		elif vencedor == rn_jogador:
-			resultado = 1
-		else:
-			resultado = -1
-
-		score += resultado
-
-		if verbose:
-			outcome = "empate" if resultado == 0 else ("vitoria" if resultado == 1 else "derrota")
-			print(f"  Resultado: {outcome}")
-
-	return score
+	# retorna média por partida
+	return total_score / num_partidas
