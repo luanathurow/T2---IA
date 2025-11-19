@@ -205,39 +205,51 @@ def jogar_contra_rede():
         return
 
     jogo = TicTacToe()
-    # Para destacar a “dificuldade 2”, deixamos a REDE começar como X
-    jogador = 1  # rede (X) começa
-    humano = -1  # humano joga com O
 
-    jogadas_totais_rede = 0
-    jogadas_validas_rede = 0
+    # Sorteia quem será X e quem será O
+    # X (1) sempre começa a partida
+    if random.random() < 0.5:
+        rede_jogador = 1   # IA é X
+        humano = -1        # humano é O
+        print("Nesta partida, a IA (Rede Neural) será X e começa jogando.")
+    else:
+        rede_jogador = -1  # IA é O
+        humano = 1         # humano é X
+        print("Nesta partida, você será X e começa jogando. A IA é O.")
+
+    input("Pressione ENTER para começar o jogo...")
+
+    jogador = 1  # X sempre começa (pode ser humano ou IA, depende do sorteio)
 
     while True:
         limpar_console()
         jogo.mostrar()
 
-        if jogador == 1:
-            print("Vez da IA Rede Neural (X)")
+        if jogador == rede_jogador:
+            simbolo = 'X' if rede_jogador == 1 else 'O'
+            print(f"Vez da IA Rede Neural ({simbolo})")
             movs_validos = jogo.movimentos_disponiveis()
             if not movs_validos:
                 break
+
             l, c = rede.escolher_jogada(jogo.board, movs_validos)
 
+            # Segurança: se por algum bug vier jogada inválida, corrige
             if not jogo.jogada_valida(l, c):
                 l, c = random.choice(movs_validos)
-            jogo.fazer_jogada(l, c, 1)
 
-            jogadas_totais_rede += 1
-            jogadas_validas_rede += 1
+            jogo.fazer_jogada(l, c, rede_jogador)
+
         else:
-            print("Sua vez (O)")
+            simbolo = 'X' if humano == 1 else 'O'
+            print(f"Sua vez ({simbolo})")
             jogada_humano(jogo, humano)
 
         vencedor = jogo.checar_vencedor()
         if vencedor is not None:
             limpar_console()
             jogo.mostrar()
-            if vencedor == 1:
+            if vencedor == rede_jogador:
                 print("\nA IA Rede Neural venceu! 🤖🧠")
             else:
                 print("\nVocê venceu! 🎉")
@@ -249,18 +261,10 @@ def jogar_contra_rede():
             print("\nEmpate!")
             break
 
-        jogador *= -1
+        jogador *= -1  # alterna turno
 
-    if jogadas_totais_rede > 0:
-        acuracia = jogadas_validas_rede / jogadas_totais_rede
-        print(f"\nAcurácia aproximada da IA (jogadas válidas): {acuracia * 100:.2f}%")
-    else:
-        print("\nNão houve jogadas da IA para medir acurácia.")
-
-
-
+    print("\nJogo encerrado.")
     input("Pressione ENTER para continuar.")
-
 
 # ----------------------------------------------------------------------
 # Treinar Rede Neural (AG + Minimax)
@@ -268,13 +272,13 @@ def jogar_contra_rede():
 def treinar_rede():
     limpar_console()
     print("=== Treino da Rede Neural com Algoritmo Genético + Minimax ===\n")
-    print("Durante o treino, a rede SEMPRE começa jogando como X (1).")
-    print("Nas primeiras gerações, o oponente é o Minimax em modo MÉDIO;")
-    print("nas últimas gerações, o oponente é o Minimax em modo DIFÍCIL.")
+    print("Durante o treino, em cada partida a rede pode ser X (1) ou O (-1).")
+    print("X sempre começa a partida.")
+    print("O oponente é o Minimax em modo MÉDIO (50% Minimax / 50% aleatório).")
     print("Os pesos finais serão salvos em 'best_chromosome.npy'.\n")
     input("Pressione ENTER para iniciar o treino...")
 
-    melhor_chrom, melhor_rede = treinar_ag()
+    melhor_chrom, melhor_rede = treinar_ag(hidden_size=18)
     print("\nTreino concluído!")
     print("Melhor cromossomo salvo em 'best_chromosome.npy'.")
     input("Pressione ENTER para continuar.")
