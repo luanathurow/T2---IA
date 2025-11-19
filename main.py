@@ -274,7 +274,7 @@ def treinar_rede():
     print("=== Treino da Rede Neural com Algoritmo Genético + Minimax ===\n")
     print("Durante o treino, em cada partida a rede pode ser X (1) ou O (-1).")
     print("X sempre começa a partida.")
-    print("O oponente é o Minimax em modo MÉDIO (50% Minimax / 50% aleatório).")
+    print("O oponente é o Minimax em modo DIFÍCIL (sempre Minimax).")
     print("Os pesos finais serão salvos em 'best_chromosome.npy'.\n")
     input("Pressione ENTER para iniciar o treino...")
 
@@ -295,7 +295,9 @@ def treinar_rede_cust(num_geracoes,pop_size,hidden_size,modo_minimax,partidas_po
     print("=== Treino da Rede Neural com Algoritmo Genético + Minimax ===\n")
     print("Durante o treino, em cada partida a rede pode ser X (1) ou O (-1).")
     print("X sempre começa a partida.")
-    print("O oponente é o Minimax em modo MÉDIO (50% Minimax / 50% aleatório).")
+    # Mostra o modo efetivamente escolhido pelo usuário
+    mode_desc = "(50% Minimax / 50% aleatório)" if modo_minimax == 'medio' else "(sempre Minimax)"
+    print(f"O oponente é o Minimax em modo {modo_minimax.upper()} {mode_desc}.")
     print("Os pesos finais serão salvos em 'best_chromosome.npy'.\n")
     input("Pressione ENTER para iniciar o treino...")
 
