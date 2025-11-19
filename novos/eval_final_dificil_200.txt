@@ -1,0 +1,7 @@
+Carregado cromossomo de 'best_chromosome.npy'
+Executando 200 partidas (modo minimax=dificil)...
+
+Resultados:
+Rede venceu: 0 (0.00%)
+Minimax venceu: 100 (50.00%)
+Empates: 100 (50.00%)

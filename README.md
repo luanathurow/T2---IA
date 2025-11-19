@@ -58,6 +58,3 @@ Próximos passos sugeridos
 
 Contato / execução
 - Está tudo pronto para rodar localmente: veja os comandos acima. Se quiser que eu aplique alguma mudança (por exemplo `--seed` ou `patience`) ou gere um relatório/plot, diga qual das opções prefere.
-
----
-Arquivo gerado automaticamente pelo assistente — resumo conciso das funcionalidades e instruções.
