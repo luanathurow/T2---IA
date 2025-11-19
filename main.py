@@ -9,6 +9,9 @@ import numpy as np
 import random
 import os
 
+# Mensagem de pausa reutilizável
+PAUSE_MSG = "Pressione ENTER para continuar."
+
 
 # ----------------------------------------------------------------------
 # Utilitários de console
@@ -45,8 +48,12 @@ def jogada_maquina_aleatoria(jogo: TicTacToe, jogador):
 def jogada_humano(jogo: TicTacToe, jogador):
     while True:
         try:
-            pos = input("Digite linha e coluna (ex: 1 2): ")
+            movs = jogo.movimentos_disponiveis()
+            print(f"Movimentos válidos (0-based): {movs}")
+            pos = input("Digite linha e coluna 0-based (ex: 0 2): ")
             l, c = map(int, pos.split())
+
+            # aceitar apenas 0-based (0..2)
             if l in range(3) and c in range(3):
                 if jogo.fazer_jogada(l, c, jogador):
                     return
@@ -55,7 +62,7 @@ def jogada_humano(jogo: TicTacToe, jogador):
             else:
                 print("Posição inválida! Use valores entre 0 e 2.")
         except Exception:
-            print("Entrada inválida!")
+            print("Entrada inválida! Use o formato: linha coluna (ex: 0 2)")
 
 
 # ----------------------------------------------------------------------
@@ -97,13 +104,15 @@ def jogar_contra_maquina():
                 print("\nVocê venceu! 🎉")
             else:
                 print("\nA máquina venceu! 🤖")
-            break
+            input(PAUSE_MSG)
+            return vencedor
 
         if jogo.checar_empate():
             limpar_console()
             jogo.mostrar()
             print("\nEmpate!")
-            break
+            input(PAUSE_MSG)
+            return 0
 
         jogador *= -1  # troca 1 → -1 → 1 → -1 ...
 
@@ -127,13 +136,15 @@ def jogar_humano_vs_humano():
             limpar_console()
             jogo.mostrar()
             print(f"\nJogador {'X' if vencedor == 1 else 'O'} venceu! 🎉")
-            break
+            input(PAUSE_MSG)
+            return vencedor
 
         if jogo.checar_empate():
             limpar_console()
             jogo.mostrar()
             print("\nEmpate!")
-            break
+            input(PAUSE_MSG)
+            return 0
 
         jogador *= -1
 
@@ -170,13 +181,15 @@ def jogar_contra_minimax():
                 print("\nVocê venceu! 🎉")
             else:
                 print("\nA IA Minimax venceu! 🤖")
-            break
+            input(PAUSE_MSG)
+            return vencedor
 
         if jogo.checar_empate():
             limpar_console()
             jogo.mostrar()
             print("\nEmpate!")
-            break
+            input(PAUSE_MSG)
+            return 0
 
         jogador *= -1  # troca 1 → -1 → 1 → -1 ...
 
@@ -241,13 +254,15 @@ def jogar_contra_rede():
                 print("\nA IA Rede Neural venceu! 🤖🧠")
             else:
                 print("\nVocê venceu! 🎉")
-            break
+            input(PAUSE_MSG)
+            return vencedor
 
         if jogo.checar_empate():
             limpar_console()
             jogo.mostrar()
             print("\nEmpate!")
-            break
+            input(PAUSE_MSG)
+            return 0
 
         jogador *= -1
 
@@ -288,15 +303,19 @@ def main():
         opc = exibir_menu()
 
         if opc == '1':
-            jogar_humano_vs_humano()
+            _res = jogar_humano_vs_humano()
+            input("Pressione ENTER para continuar.")
         elif opc == '2':
-            jogar_contra_maquina()
+            _res = jogar_contra_maquina()
+            input("Pressione ENTER para continuar.")
         elif opc == '3':
             # Dificuldade 1: IA Minimax
-            jogar_contra_minimax()
+            _res = jogar_contra_minimax()
+            input("Pressione ENTER para continuar.")
         elif opc == '4':
             # Dificuldade 2: IA Rede Neural (treinada pelo AG+Minimax)
-            jogar_contra_rede()
+            _res = jogar_contra_rede()
+            input("Pressione ENTER para continuar.")
         elif opc == '5':
             treinar_rede()
         elif opc == '0':

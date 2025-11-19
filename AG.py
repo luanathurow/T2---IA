@@ -1,9 +1,11 @@
 # operacao/genetic_algorithm.py
 import random
 import numpy as np
+import multiprocessing
 
 from tic_tac_toe import TicTacToe
 from rede_neural import NeuralNetwork
+from operacao.aptidao import aptidao
 
 # ----------------------------------------------------------
 # Parâmetros do AG (pode ajustar depois para experimentar)
@@ -28,66 +30,8 @@ def jogada_oponente_aleatorio(jogo: TicTacToe, jogador: int):
     jogo.fazer_jogada(l, c, jogador)
 
 
-# ----------------------------------------------------------
-# Função de avaliação (fitness) - SEM MINIMAX
-# ----------------------------------------------------------
-def avaliar_rede(rede: NeuralNetwork) -> float:
-    """
-    Avalia a rede jogando JOGOS_POR_INDIVIDUO partidas contra um oponente aleatório.
-
-    - A rede SEMPRE começa e joga como X (1).
-    - O oponente (aleatório) joga como O (-1).
-    - Retorna um escore de fitness (quanto maior, melhor).
-    """
-    fitness_total = 0.0
-
-    for _ in range(JOGOS_POR_INDIVIDUO):
-        jogo = TicTacToe()
-        jogador_atual = 1  # rede começa como X
-
-        penalidade_invalidos = 0
-        jogadas_validas = 0
-
-        while not jogo.jogo_terminou():
-            if jogador_atual == 1:
-                # Rede Neural
-                movs_validos = jogo.movimentos_disponiveis()
-                if not movs_validos:
-                    break
-
-                l, c = rede.escolher_jogada(jogo.board, movs_validos)
-
-                # Se (por qualquer bug) não for válida, penaliza e força jogada válida
-                if not jogo.jogada_valida(l, c):
-                    penalidade_invalidos += 1
-                    l, c = random.choice(movs_validos)
-
-                jogo.fazer_jogada(l, c, jogador_atual)
-                jogadas_validas += 1
-
-            else:
-                # Oponente aleatório
-                jogada_oponente_aleatorio(jogo, jogador_atual)
-
-            jogador_atual *= -1  # troca turno
-
-        vencedor = jogo.checar_vencedor()
-
-        # ------------------------------
-        # Função de aptidão (fitness)
-        # ------------------------------
-        if vencedor == 1:      # rede venceu
-            fitness_total += 10
-        elif vencedor == -1:   # rede perdeu
-            fitness_total -= 8
-        else:                  # empate
-            fitness_total += 5
-
-        # penaliza jogadas inválidas e recompensa jogadas válidas
-        fitness_total -= 3 * penalidade_invalidos
-        fitness_total += 1 * jogadas_validas
-
-    return fitness_total
+# A avaliação agora é feita por operacao.aptidao. A função `aptidao`
+# avalia um cromossomo jogando contra o Minimax e já retorna um escore.
 
 
 # ----------------------------------------------------------
@@ -180,10 +124,23 @@ def mutacao(populacao, taxa_mutacao=TAXA_MUTACAO, std_mutacao=STD_MUTACAO):
 # ----------------------------------------------------------
 # Treino principal do AG (SEM MINIMAX)
 # ----------------------------------------------------------
+def _eval_crom_tuple(args):
+    chrom, partidas, modo, hidden = args
+    return aptidao(chrom, partidas=partidas, modo=modo, hidden_size=hidden)
+
+
 def treinar_ag(
     num_geracoes=NUM_GERACOES,
     pop_size=POP_SIZE,
-    hidden_size=18
+    hidden_size=18,
+    modo_minimax: str = 'dificil',
+    partidas_por_individuo: int = JOGOS_POR_INDIVIDUO,
+    elite_size: int = ELITE_SIZE,
+    torneio_k: int = TORNEIO_K,
+    taxa_mutacao: float = TAXA_MUTACAO,
+    std_mutacao: float = STD_MUTACAO,
+    use_parallel: bool = False,
+    num_workers: int = None
 ):
     """
     Treina a rede usando AG jogando contra um oponente aleatório.
@@ -201,13 +158,20 @@ def treinar_ag(
     melhor_cromossomo_global = None
 
     for geracao in range(num_geracoes):
-        fitness = []
-
-        # Avaliação de todos os cromossomos
-        for chrom in populacao:
-            rede = NeuralNetwork.from_chromosome(chrom, hidden_size=hidden_size)
-            fit = avaliar_rede(rede)
-            fitness.append(fit)
+        # Avaliação de todos os cromossomos usando a função de aptidão
+        if use_parallel:
+            # prepara argumentos para cada cromossomo
+            args_list = [(chrom, partidas_por_individuo, modo_minimax, hidden_size) for chrom in populacao]
+            workers = num_workers or multiprocessing.cpu_count()
+            with multiprocessing.Pool(processes=workers) as pool:
+                fitness = pool.map(_eval_crom_tuple, args_list)
+            fitness = np.array(fitness, dtype=float)
+        else:
+            fitness = []
+            for chrom in populacao:
+                fit = aptidao(chrom, partidas=partidas_por_individuo, modo=modo_minimax, hidden_size=hidden_size)
+                fitness.append(fit)
+            fitness = np.array(fitness, dtype=float)
 
         fitness = np.array(fitness, dtype=float)
         media_fit = fitness.mean()
@@ -228,11 +192,11 @@ def treinar_ag(
             print("Convergência detectada (baixa variância de fitness). Encerrando treino.")
             break
 
-        # Gera nova população
-        elite = selecao_elitismo(populacao, fitness)
-        pais = selecao_torneio(populacao, fitness)
+        # Gera nova população (com parâmetros customizáveis)
+        elite = selecao_elitismo(populacao, fitness, elite_size=elite_size)
+        pais = selecao_torneio(populacao, fitness, k=torneio_k)
         filhos = gerar_filhos(pais)
-        mutacao(filhos)
+        mutacao(filhos, taxa_mutacao=taxa_mutacao, std_mutacao=std_mutacao)
 
         populacao = elite + filhos
         populacao = populacao[:pop_size]
