@@ -154,6 +154,9 @@ def treinar_ag(
         hidden_size=hidden_size
     )
 
+    if num_workers == 0:
+        num_workers = None
+
     melhor_fitness_global = float('-inf')
     melhor_cromossomo_global = None
 

@@ -9,9 +9,6 @@ import numpy as np
 import random
 import os
 
-# Mensagem de pausa reutilizável
-PAUSE_MSG = "Pressione ENTER para continuar."
-
 
 # ----------------------------------------------------------------------
 # Utilitários de console
@@ -48,12 +45,8 @@ def jogada_maquina_aleatoria(jogo: TicTacToe, jogador):
 def jogada_humano(jogo: TicTacToe, jogador):
     while True:
         try:
-            movs = jogo.movimentos_disponiveis()
-            print(f"Movimentos válidos (0-based): {movs}")
-            pos = input("Digite linha e coluna 0-based (ex: 0 2): ")
+            pos = input("Digite linha e coluna (ex: 1 2): ")
             l, c = map(int, pos.split())
-
-            # aceitar apenas 0-based (0..2)
             if l in range(3) and c in range(3):
                 if jogo.fazer_jogada(l, c, jogador):
                     return
@@ -62,7 +55,7 @@ def jogada_humano(jogo: TicTacToe, jogador):
             else:
                 print("Posição inválida! Use valores entre 0 e 2.")
         except Exception:
-            print("Entrada inválida! Use o formato: linha coluna (ex: 0 2)")
+            print("Entrada inválida!")
 
 
 # ----------------------------------------------------------------------
@@ -104,15 +97,13 @@ def jogar_contra_maquina():
                 print("\nVocê venceu! 🎉")
             else:
                 print("\nA máquina venceu! 🤖")
-            input(PAUSE_MSG)
-            return vencedor
+            break
 
         if jogo.checar_empate():
             limpar_console()
             jogo.mostrar()
             print("\nEmpate!")
-            input(PAUSE_MSG)
-            return 0
+            break
 
         jogador *= -1  # troca 1 → -1 → 1 → -1 ...
 
@@ -136,15 +127,13 @@ def jogar_humano_vs_humano():
             limpar_console()
             jogo.mostrar()
             print(f"\nJogador {'X' if vencedor == 1 else 'O'} venceu! 🎉")
-            input(PAUSE_MSG)
-            return vencedor
+            break
 
         if jogo.checar_empate():
             limpar_console()
             jogo.mostrar()
             print("\nEmpate!")
-            input(PAUSE_MSG)
-            return 0
+            break
 
         jogador *= -1
 
@@ -181,15 +170,13 @@ def jogar_contra_minimax():
                 print("\nVocê venceu! 🎉")
             else:
                 print("\nA IA Minimax venceu! 🤖")
-            input(PAUSE_MSG)
-            return vencedor
+            break
 
         if jogo.checar_empate():
             limpar_console()
             jogo.mostrar()
             print("\nEmpate!")
-            input(PAUSE_MSG)
-            return 0
+            break
 
         jogador *= -1  # troca 1 → -1 → 1 → -1 ...
 
@@ -218,63 +205,66 @@ def jogar_contra_rede():
         return
 
     jogo = TicTacToe()
-    # Para destacar a “dificuldade 2”, deixamos a REDE começar como X
-    jogador = 1  # rede (X) começa
-    humano = -1  # humano joga com O
 
-    jogadas_totais_rede = 0
-    jogadas_validas_rede = 0
+    # Sorteia quem será X e quem será O
+    # X (1) sempre começa a partida
+    if random.random() < 0.5:
+        rede_jogador = 1   # IA é X
+        humano = -1        # humano é O
+        print("Nesta partida, a IA (Rede Neural) será X e começa jogando.")
+    else:
+        rede_jogador = -1  # IA é O
+        humano = 1         # humano é X
+        print("Nesta partida, você será X e começa jogando. A IA é O.")
+
+    input("Pressione ENTER para começar o jogo...")
+
+    jogador = 1  # X sempre começa (pode ser humano ou IA, depende do sorteio)
 
     while True:
         limpar_console()
         jogo.mostrar()
 
-        if jogador == 1:
-            print("Vez da IA Rede Neural (X)")
+        if jogador == rede_jogador:
+            simbolo = 'X' if rede_jogador == 1 else 'O'
+            print(f"Vez da IA Rede Neural ({simbolo})")
             movs_validos = jogo.movimentos_disponiveis()
             if not movs_validos:
                 break
+
             l, c = rede.escolher_jogada(jogo.board, movs_validos)
 
+            # Segurança: se por algum bug vier jogada inválida, corrige
             if not jogo.jogada_valida(l, c):
                 l, c = random.choice(movs_validos)
-            jogo.fazer_jogada(l, c, 1)
 
-            jogadas_totais_rede += 1
-            jogadas_validas_rede += 1
+            jogo.fazer_jogada(l, c, rede_jogador)
+
         else:
-            print("Sua vez (O)")
+            simbolo = 'X' if humano == 1 else 'O'
+            print(f"Sua vez ({simbolo})")
             jogada_humano(jogo, humano)
 
         vencedor = jogo.checar_vencedor()
         if vencedor is not None:
             limpar_console()
             jogo.mostrar()
-            if vencedor == 1:
+            if vencedor == rede_jogador:
                 print("\nA IA Rede Neural venceu! 🤖🧠")
             else:
                 print("\nVocê venceu! 🎉")
-            input(PAUSE_MSG)
-            return vencedor
+            break
 
         if jogo.checar_empate():
             limpar_console()
             jogo.mostrar()
             print("\nEmpate!")
-            input(PAUSE_MSG)
-            return 0
+            break
 
-        jogador *= -1
+        jogador *= -1  # alterna turno
 
-    # Métrica simples de “acurácia”: proporção de jogadas válidas da rede
-    if jogadas_totais_rede > 0:
-        acuracia = jogadas_validas_rede / jogadas_totais_rede
-        print(f"\nAcurácia aproximada da IA (jogadas válidas): {acuracia * 100:.2f}%")
-    else:
-        print("\nNão houve jogadas da IA para medir acurácia.")
-
+    print("\nJogo encerrado.")
     input("Pressione ENTER para continuar.")
-
 
 # ----------------------------------------------------------------------
 # Treinar Rede Neural (AG + Minimax)
@@ -282,18 +272,37 @@ def jogar_contra_rede():
 def treinar_rede():
     limpar_console()
     print("=== Treino da Rede Neural com Algoritmo Genético + Minimax ===\n")
-    print("Durante o treino, a rede SEMPRE começa jogando como X (1).")
-    print("O adversário usado pelo AG é o Minimax (primeiro médio, depois difícil).")
+    print("Durante o treino, em cada partida a rede pode ser X (1) ou O (-1).")
+    print("X sempre começa a partida.")
+    print("O oponente é o Minimax em modo MÉDIO (50% Minimax / 50% aleatório).")
     print("Os pesos finais serão salvos em 'best_chromosome.npy'.\n")
     input("Pressione ENTER para iniciar o treino...")
 
-    melhor_chrom, melhor_rede = treinar_ag()
-
+    melhor_chrom, melhor_rede = treinar_ag(hidden_size=18)
     print("\nTreino concluído!")
     print("Melhor cromossomo salvo em 'best_chromosome.npy'.")
     input("Pressione ENTER para continuar.")
 
 
+def treinar_rede_cust(num_geracoes,pop_size,hidden_size,modo_minimax,partidas_por_individuo,elite_size,torneio_k,taxa_mutacao,std_mutacao,use_parallel,num_workers):
+    if use_parallel.lower() == 'true':
+        use_parallel = True
+    elif use_parallel.lower() == 'false':
+        use_parallel = False 
+
+    
+    limpar_console()
+    print("=== Treino da Rede Neural com Algoritmo Genético + Minimax ===\n")
+    print("Durante o treino, em cada partida a rede pode ser X (1) ou O (-1).")
+    print("X sempre começa a partida.")
+    print("O oponente é o Minimax em modo MÉDIO (50% Minimax / 50% aleatório).")
+    print("Os pesos finais serão salvos em 'best_chromosome.npy'.\n")
+    input("Pressione ENTER para iniciar o treino...")
+
+    _, _ = treinar_ag(num_geracoes,pop_size,hidden_size,modo_minimax,partidas_por_individuo,elite_size,torneio_k,taxa_mutacao,std_mutacao,use_parallel,num_workers)
+    print("\nTreino concluído!")
+    print("Melhor cromossomo salvo em 'best_chromosome.npy'.")
+    input("Pressione ENTER para continuar.")
 # ----------------------------------------------------------------------
 # Main / menu principal
 # ----------------------------------------------------------------------
@@ -303,21 +312,24 @@ def main():
         opc = exibir_menu()
 
         if opc == '1':
-            _res = jogar_humano_vs_humano()
-            input("Pressione ENTER para continuar.")
+            jogar_humano_vs_humano()
         elif opc == '2':
-            _res = jogar_contra_maquina()
-            input("Pressione ENTER para continuar.")
+            jogar_contra_maquina()
         elif opc == '3':
             # Dificuldade 1: IA Minimax
-            _res = jogar_contra_minimax()
-            input("Pressione ENTER para continuar.")
+            jogar_contra_minimax()
         elif opc == '4':
             # Dificuldade 2: IA Rede Neural (treinada pelo AG+Minimax)
-            _res = jogar_contra_rede()
-            input("Pressione ENTER para continuar.")
+            jogar_contra_rede()
         elif opc == '5':
-            treinar_rede()
+            opcust = input('Deseja customizar os parametros do treino? s/n').lower()
+            if opcust.strip() == 's':
+                print("Exemplo de input: num_geracoes pop_size hidden_size modo_minimax(medio ou dificil) partidas_por_individuo elite_size torneio_k taxa_mutacao std_mutacao use_parallel(True ou False) num_workers")
+                cust = input('Digite aqui: ').split(' ')
+                treinar_rede_cust(int(cust[0]),int(cust[1]),int(cust[2]),cust[3],int(cust[4]),int(cust[5]),int(cust[6]),float(cust[7]),float(cust[8]),cust[9],int(cust[10]))
+            else:
+                treinar_rede()
+            
         elif opc == '0':
             break
         else:
