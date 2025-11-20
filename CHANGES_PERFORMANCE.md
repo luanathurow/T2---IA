@@ -22,7 +22,7 @@ Este arquivo resume, de forma concisa, as alterações feitas no repositório qu
 - `treino_ag.py` (CLI) e `evaluate_vs_minimax.py` (avaliação em lote) automatizaram execuções, facilitando testes comparativos e coleta de estatísticas (e.g., 200 partidas por avaliação).
 
 6) Interface e robustez
-- `main.py` recebeu melhoria na entrada humana (agora 0-based) e pausas para revisar resultados, reduzindo erro humano durante testes e replays.
+- `main.py` recebeu melhoria na entrada humana (agora base 0) e pausas para revisar resultados, reduzindo erro humano durante testes e replays.
 
 7) Estratégia de tuning aplicada
 - Aumentar `--games` (jogos por indivíduo) reduz ruído no cálculo do fitness e produz avaliações mais estáveis.

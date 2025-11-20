@@ -8,9 +8,12 @@ class TicTacToe:
     def mostrar(self):
         symbols = {1: 'X', -1: 'O', 0: ' '}
         print("\nTabuleiro:")
-        for linha in self.board:
-            print("|".join(symbols[c] for c in linha))
-            print("-" * 5)
+        # cabeçalho de colunas
+        print("   0 1 2")
+        for i, linha in enumerate(self.board):
+            row_str = "|".join(symbols[c] for c in linha)
+            print(f"{i}  {row_str}")
+            print("  " + "-" * 5)
 
     def jogada_valida(self, linha, col):
         return self.board[linha][col] == 0

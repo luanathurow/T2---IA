@@ -45,8 +45,12 @@ def jogada_maquina_aleatoria(jogo: TicTacToe, jogador):
 def jogada_humano(jogo: TicTacToe, jogador):
     while True:
         try:
-            pos = input("Digite linha e coluna (ex: 1 2): ")
+            movs = jogo.movimentos_disponiveis()
+            print(f"Movimentos válidos (base 0): {movs}")
+            pos = input("Digite linha e coluna base 0 (ex: 0 2): ")
             l, c = map(int, pos.split())
+
+            # aceitar apenas base 0 (0..2)
             if l in range(3) and c in range(3):
                 if jogo.fazer_jogada(l, c, jogador):
                     return
@@ -55,7 +59,7 @@ def jogada_humano(jogo: TicTacToe, jogador):
             else:
                 print("Posição inválida! Use valores entre 0 e 2.")
         except Exception:
-            print("Entrada inválida!")
+            print("Entrada inválida! Use o formato: linha coluna (ex: 0 2)")
 
 
 # ----------------------------------------------------------------------
