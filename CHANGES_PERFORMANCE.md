@@ -1,7 +1,5 @@
 ## Principais mudanças que melhoraram desempenho
 
-Este arquivo resume, de forma concisa, as alterações feitas no repositório que tiveram impacto direto no desempenho do treino e avaliação da Rede Neural.
-
 1) Avaliação de aptidão concentrada no Minimax
 - Implementada a função `operacao/aptidao.py` que avalia cromossomos jogando contra o Minimax e aplica penalizações por jogadas inválidas.
 - Centralizar a lógica de avaliação permitiu medir fitness de forma consistente e alterar facilmente o número de partidas por indivíduo (`--games`).
@@ -33,8 +31,5 @@ Notas operacionais rápidas
   - `python treino_ag.py --generations 100 --pop 80 --games 12 --elite 2 --torneio 2 --taxa_mut 0.12 --std_mut 0.12 --out ag_tuned.csv`
 - Após o treino, avalie com: `python evaluate_vs_minimax.py -g 200 -m medio` e `-m dificil`.
 
-Próximos passos (se quiser aprimorar mais)
-- Implementar critério de parada com "patience" em vez de parar só por baixa variância;
-- Salvar stats por geração (CSV) para análise de convergência e geração de plots;
-- Paralelizar ainda mais (workers por GPU/BLAS ou usar job que execute várias sementes em paralelo) — envolve mais infraestrutura.
+
 
